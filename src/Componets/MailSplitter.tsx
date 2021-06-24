@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { Splitter } from "@progress/kendo-react-layout";
 
+import MessageList from './MessageList'
+
 
 const MailSplitter = (Props: any) => {
 
@@ -15,15 +17,15 @@ const MailSplitter = (Props: any) => {
     };
 
     return (
-        <Splitter panes={panes} onChange={onChange}>
+        <Splitter style={{ height: 500 }} panes={panes} onChange={onChange}>
             <div className="pane-content">
                 <h3>Inner splitter / left pane</h3>
             </div>
             <div className="pane-content">
-                <h3>Grid Con los mensjaes</h3>
+                <MessageList />
             </div>
             <div className="pane-content">
-                <h3>Inner splitter / right pane</h3>
+              <h2>Detalles de los mensajes</h2>
             </div>
 
          </Splitter>)
