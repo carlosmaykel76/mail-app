@@ -9,24 +9,7 @@ import {
 
 const MyTools = () => {
     return (
-        <Toolbar>
-            <ToolbarItem>
-            <ButtonGroup>
-                <Button icon="EmailIcon" title="Nuevo Mensaje" togglable={true} />
-                <Button icon="DeleteIcon" title="Eliminar Mensaje" togglable={true} />
-                <Button icon="MarkAsUnreadIcon" title="No Leido / Leido" togglable={true} />
-              </ButtonGroup>
-            </ToolbarItem>
-            <ToolbarSpacer />
-            <ToolbarItem>
-              <ButtonGroup>
-                <Button icon="MailOutlineIcon" title="Responder" togglable={true} />
-                <Button icon="align-center" title="Align Center" togglable={true} />
-                <Button icon="align-right" title="Align Right" togglable={true} />
-                <Button icon="align-justify" title="Align Justify" togglable={true} />
-              </ButtonGroup>
-            </ToolbarItem>
-        </Toolbar>
+      <h2> esto es una prueba </h2>
     );
 }
 
