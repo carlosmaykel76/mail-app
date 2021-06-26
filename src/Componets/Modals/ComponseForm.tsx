@@ -1,35 +1,44 @@
 import React from 'react';
 import { Window, WindowActionsBar }  from '@progress/kendo-react-dialogs';
-import {TextField} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button } from "@progress/kendo-react-buttons";
-
-import { Input } from "@progress/kendo-react-inputs";
-
+import {Button, TextField} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import TinyMceEditor from '../../Componets/TinyMceEditor'
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+
 
 interface Props {
     openCompose: (n: boolean) => void
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
     modal:{
         width:'100%',
-        height:'499',
+        height:'520',
         background:'white',
-       // border:'1px solid #000',
         padding:"16px, 32px, 24px",
     },
-    textfield:{
-        width: '100%'
+    TextField:{
+        width:'100%',
+    },
+    paper: {
+      padding: theme.spacing(2),
+      justify: 'flex-start',
+      color: theme.palette.text.secondary,
     },
     bt:{
         textTransform:'capitalize',
+    },
+    BButton:{
+        justify: 'center',
     }
-}))
+  }),
+);
 
 const ComponseForm:React.FC<Props> = ({openCompose}) => {
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [visible, setVisible] = React.useState(true);
 
     const toggleDialog = () => {
@@ -39,54 +48,52 @@ const ComponseForm:React.FC<Props> = ({openCompose}) => {
     const styles = useStyles();
 
     return (
-        <Window title={"Nuevo Mensaje"} onClose={toggleDialog} initialHeight={500} initialWidth={800}>
+        <Window title={"Nuevo Mensaje"} onClose={toggleDialog} initialHeight={525} initialWidth={800}>
             <div className={styles.modal}>
-                <div>
-                    <Button primary={true} look="flat">Para</Button>
-                    <Input
-                        name="email"
-                        type="email"
-                        style={{ width: "90%" }}
-                        required={true}
-                    />
-                </div>                
-                <label>Subject</label>
-                <Input
-                    name="subject"
-                    type="text"
-                    style={{ width: "90%" }}
-                    required={true}
-                />
+            <Grid container spacing={1}>
+                <Grid item xs={1}>
+                    <Button className={styles.bt} >Para:</Button>
+                </Grid>
+                <Grid item xs={11}>
+                <TextField id="to" className={styles.TextField} />
+                </Grid>
+                <Grid item xs={1}>
+                    <label>Asunto:</label>
+                </Grid>
+                <Grid item xs={11}>
+                 <TextField id="subject" className={styles.TextField} />
+                </Grid>
+                <Grid item xs={12}>
+                    <TinyMceEditor />
+                </Grid>
+            </Grid>
 
-                <TinyMceEditor />
             </div>
             <WindowActionsBar layout='end'>
-                <button type="button" className="k-button" onClick={toggleDialog}>
-                    Cerrar
-                </button>
-                <button
-                    type="button"
-                    className="k-button k-primary"
-                    onClick={toggleDialog}
-                >
-                    Enviar
-                </button>
+                <Grid container spacing={1} >
+                    <Grid item xs>
+                        <Button
+                            className={styles.bt}
+                            variant="outlined"
+                            startIcon={<AttachFileIcon />}
+                        >Adjuntar</Button>
+                    </Grid>
+                    <Grid item xs style={{ display: "flex", justifyContent: "flex-end"}}>
+                    <button type="button" className="k-button" onClick={toggleDialog}>
+                            Cerrar
+                        </button>
+                        <button
+                            type="button"
+                            className="k-button k-primary"
+                            onClick={toggleDialog}
+                        >
+                            Enviar
+                        </button>
+                    </Grid>
+                </Grid>
           </WindowActionsBar>
         </Window>
     );
 }
 
 export default ComponseForm;
-
-/**
-<div className={styles.modal}>
-<h2>Nuevo Mensaje </h2>
-<TextField label="Para" className={styles.textfield} />
-<br/>
-<TextField label="Asunto" className={styles.textfield} />
-<br/>
-
-<br/>
-<br/>
-</div>
-*/

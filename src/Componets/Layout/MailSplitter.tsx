@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Splitter } from "@progress/kendo-react-layout";
 
-import MessageList from './MessageList'
+import MessageList from '../MessageList'
 
 
 const MailSplitter = (Props: any) => {

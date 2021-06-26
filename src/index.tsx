@@ -4,12 +4,13 @@ import  '@progress/kendo-theme-default/dist/all.css'
 //import '@progress/kendo-theme-material/dist/all.css'
 
 
-import App from './Componets/App'
+
+import Inbox from './Componets/Inbox'
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Inbox />
   </React.StrictMode>,
   document.getElementById('root')
 );

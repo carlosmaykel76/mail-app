@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ToolBar from  '../Componets/ToolBar';
+import ToolBar from  './Layout/ToolBar';
 import ComponseForm from './Modals/ComponseForm';
-import MailSplitter from './MailSplitter'
+import MailSplitter from './Layout/MailSplitter'
 
 import '../Styles/App.css'
 
@@ -17,7 +17,7 @@ import '../Styles/App.css'
    size?: string
 ]},*/
 
-const App = (Props: any) => {
+const Inbox = (Props: any) => {
 
   const [visible, setVisible] = React.useState(false);
 
@@ -39,4 +39,4 @@ const App = (Props: any) => {
   );
 }
 
-export default App;
+export default Inbox;

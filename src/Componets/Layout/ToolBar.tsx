@@ -39,7 +39,7 @@ const Toolbar:React.FC<Props> = ({openCompose}) => {
         <Button
             className={styles.bt}
             variant="outlined"
-            startIcon={<EmailIcon fontSize="large" />}
+            startIcon={<EmailIcon />}
             onClick={ openModal }
         >
           Nuevo Mensaje
