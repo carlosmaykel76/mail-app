@@ -2,9 +2,9 @@ import React from 'react';
 import { Window, WindowActionsBar }  from '@progress/kendo-react-dialogs';
 import {Button, TextField} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import TinyMceEditor from '../../Componets/TinyMceEditor'
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import KendoEditor from '../KendoEditor';
 
 
 interface Props {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal:{
         width:'100%',
-        height:'520',
+        height:'600',
         background:'white',
         padding:"16px, 32px, 24px",
     },
@@ -48,7 +48,7 @@ const ComponseForm:React.FC<Props> = ({openCompose}) => {
     const styles = useStyles();
 
     return (
-        <Window title={"Nuevo Mensaje"} onClose={toggleDialog} initialHeight={525} initialWidth={800}>
+        <Window title={"Nuevo Mensaje"} onClose={toggleDialog} initialHeight={600} initialWidth={800}>
             <div className={styles.modal}>
             <Grid container spacing={1}>
                 <Grid item xs={1}>
@@ -64,7 +64,7 @@ const ComponseForm:React.FC<Props> = ({openCompose}) => {
                  <TextField id="subject" className={styles.TextField} />
                 </Grid>
                 <Grid item xs={12}>
-                    <TinyMceEditor />
+                    <KendoEditor />
                 </Grid>
             </Grid>
 

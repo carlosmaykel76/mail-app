@@ -1,13 +1,11 @@
 import React, {useState} from 'react'
 import { Splitter } from "@progress/kendo-react-layout";
+import MessagesList from '../Mail/MessagesList/MessagesList';
 
-import MessageList from '../MessageList'
-
-
-const MailSplitter = (Props: any) => {
+const MailSplitter = () => {
 
     const [panes, setPanes] = useState([
-        { size: "20%", min: "200px",  collapsible: false },
+        { size: "15%", min: "150px",  collapsible: false },
         {},
         { size: "30%", min: "20px", collapsible: true },
     ]);
@@ -22,7 +20,7 @@ const MailSplitter = (Props: any) => {
                 <h3>Inner splitter / left pane</h3>
             </div>
             <div className="pane-content">
-                <MessageList />
+                <MessagesList />
             </div>
             <div className="pane-content">
               <h2>Detalles de los mensajes</h2>

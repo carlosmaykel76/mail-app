@@ -60,10 +60,9 @@ const Toolbar:React.FC<Props> = ({openCompose}) => {
           No Leido/Leido
         </Button>
       </ButtonGroup>
+
     </div>
   );
-
-
 }
 
 export default Toolbar;
