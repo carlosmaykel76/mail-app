@@ -6,7 +6,6 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import KendoEditor from '../KendoEditor';
 
-
 interface Props {
     openCompose: (n: boolean) => void
 }

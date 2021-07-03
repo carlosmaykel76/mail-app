@@ -1,8 +1,15 @@
 import React, {useState} from 'react'
 import { Splitter } from "@progress/kendo-react-layout";
+
 import MessagesList from '../Mail/MessagesList/MessagesList';
+import MessageDetails from '../Mail/MessageDetails/MessageDetails';
+import MessageData from '../../data/MessageData';
 
 const MailSplitter = () => {
+    const [itemSelectState, setItemSelectState] = useState(null)
+    const [allSelectState, setAllSelectState] = useState(false)
+
+    const CountMsg = MessageData.length;
 
     const [panes, setPanes] = useState([
         { size: "15%", min: "150px",  collapsible: false },
@@ -14,16 +21,21 @@ const MailSplitter = () => {
         setPanes(event.newState);
     };
 
+    const AllSelectMsg = () => {
+        alert('presiona el checkbpx');
+    }
+        
+
     return (
         <Splitter style={{ height: 500 }} panes={panes} onChange={onChange}>
             <div className="pane-content">
                 <h3>Inner splitter / left pane</h3>
             </div>
-            <div className="pane-content">
+            <div className="pane-content">               
                 <MessagesList />
             </div>
             <div className="pane-content">
-              <h2>Detalles de los mensajes</h2>
+                <MessageDetails />
             </div>
 
          </Splitter>)

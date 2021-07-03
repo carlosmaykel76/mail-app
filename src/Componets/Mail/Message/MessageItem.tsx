@@ -38,7 +38,8 @@ const MessagesItem = (msg:IData) => {
       <TableRow key={msg.id} hover >
           <TableCell padding="checkbox">
             <Checkbox size='small'                    
-              inputProps={{ 'aria-label': 'select all desserts' }}                    
+              inputProps={{ 'aria-label': 'select all desserts' }}      
+              id={msg.id}              
             />
           </TableCell>
           <TableCell>{(msg.importance==='alta')?<PriorityHighIcon fontSize="small" color="primary"/>:''}</TableCell>
