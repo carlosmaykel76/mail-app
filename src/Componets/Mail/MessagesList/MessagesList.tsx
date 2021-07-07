@@ -1,20 +1,39 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
-import MessageData from '../../../data/MessageData';
+
 import MessageItem from '../Message/MessageItem';
 
+interface IMessage {
+  id: number;
+  importance: string;
+  attached: boolean;
+  personfor: string;
+  subject: string;
+  sent: string;
+  size: string;
+  read: boolean;
+}
+
+interface IMessageListProps {
+  dataList:Array<IMessage>;
+  onClick: (event: React.MouseEvent<unknown>, id:number) => void;
+  onSelect: (event: React.MouseEvent<unknown>, id:number) => void;
+}
+
 const useStyles = makeStyles({
-    container: {
-      maxHeight: 440, 
-    },
-  });
+  container: {
+    maxHeight: 440, 
+  },
+  cellIcon:{
+    width: '1%',
+  },
+});
 
-const MessageList = () => {
-
-  const [itemSelectState, setItemSelectState] = useState(null)
+const MessageList:React.FC<IMessageListProps> = ({ dataList, onClick, onSelect}) => {
+ 
   const styles = useStyles();
 
   return (
@@ -22,35 +41,37 @@ const MessageList = () => {
       <Table size="small">
         <TableHead>
           <TableRow>
-                <TableCell padding="checkbox">
+              <TableCell padding="checkbox">
                 <Checkbox size='small'                  
                   inputProps={{ 'aria-label': 'select all desserts' }}
-                  onClick={handleOnClick}
+                  onClick={(event) =>  onClick(event, 0)}
                 />
               </TableCell>
-              <TableCell><PriorityHighIcon fontSize="small"/></TableCell>
-              <TableCell><AttachFileIcon fontSize="small"/></TableCell>
+              <TableCell padding="checkbox" ><PriorityHighIcon fontSize="small"/></TableCell>
+              <TableCell padding="checkbox" ><AttachFileIcon fontSize="small"/></TableCell>
               <TableCell>personfor</TableCell>
               <TableCell>subject</TableCell>
               <TableCell>sent</TableCell>
               <TableCell>size</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>   
-          {MessageData.map((item) =>(
-            /*<MessageItem  {...item} />*/
+        <TableBody>     
+          {dataList.length > 0 ? 
             <MessageItem 
-              id={item.id}
-              importance = {item.importance}
-              attached = {item.attached}
-              personfor = {item.personfor}
-              subject = {item.subject}
-              sent = {item.sent}
-              size = {item.size}
-              read = {item.read}
-            />
-            
-          ))}
+              listMessage={ dataList } 
+              onClick={onClick} 
+              onSelect={onSelect} 
+            />:
+               <TableRow>
+               <TableCell padding="checkbox"></TableCell>
+               <TableCell></TableCell>
+               <TableCell></TableCell>
+               <TableCell></TableCell>
+               <TableCell></TableCell>
+               <TableCell></TableCell>
+               <TableCell></TableCell>              
+             </TableRow>
+          }
         </TableBody>  
       </Table>
     </TableContainer>

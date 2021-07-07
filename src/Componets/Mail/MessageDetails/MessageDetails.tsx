@@ -29,18 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface IData {
-    id: number;
-    importance: string;
-    attached: boolean;
-    personfor: string;
-    subject: string;
-    sent: string;
-    size: string;
-    read: boolean;
-}
-
-
 const MessageDetails = () => {
     const styles = useStyles(); 
 
