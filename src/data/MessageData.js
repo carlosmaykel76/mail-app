@@ -8,6 +8,7 @@ const MessageData = [
     sent: '2021-06-03',
     size: '5kb',
     read: true,
+    body:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse ut metus. Proin venenatis turpis sit amet ante consequat semper. Aenean nunc. Duis iaculis odio id lectus. Integer dapibus justo vitae elit. Nunc luctus, tortor quis iaculis tempus, urna odio iaculis erat, imperdiet lobortis orci lectus at eros. Ut a velit id odio malesuada nonummy. Aenean cursus metus a purus. Duis dapibus odio a enim. Aliquam ut diam sed nisl imperdiet gravida. Proin eget tellus ut ante dignissim dictum. Integer ut justo quis eros feugiat convallis. Praesent massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla egestas, nibh at malesuada nonummy, mi augue condimentum velit, a facilisis tortor ipsum non diam.',    
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const MessageData = [
     sent: '2021-06-10',
     size: '5kb',
     read: false,
+    body:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse ut metus. Proin venenatis turpis sit amet ante consequat semper. Aenean nunc. Duis iaculis odio id lectus. Integer dapibus justo vitae elit. Nunc luctus, tortor quis iaculis tempus, urna odio iaculis erat, imperdiet lobortis orci lectus at eros. Ut a velit id odio malesuada nonummy. Aenean cursus metus a purus. Duis dapibus odio a enim. Aliquam ut diam sed nisl imperdiet gravida. Proin eget tellus ut ante dignissim dictum. Integer ut justo quis eros feugiat convallis. Praesent massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla egestas, nibh at malesuada nonummy, mi augue condimentum velit, a facilisis tortor ipsum non diam.',
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const MessageData = [
     sent: '2021-06-10',
     size: '5kb',
     read: false,
+    body:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse ut metus. Proin venenatis turpis sit amet ante consequat semper. Aenean nunc. Duis iaculis odio id lectus. Integer dapibus justo vitae elit. Nunc luctus, tortor quis iaculis tempus, urna odio iaculis erat, imperdiet lobortis orci lectus at eros. Ut a velit id odio malesuada nonummy. Aenean cursus metus a purus. Duis dapibus odio a enim. Aliquam ut diam sed nisl imperdiet gravida. Proin eget tellus ut ante dignissim dictum. Integer ut justo quis eros feugiat convallis. Praesent massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla egestas, nibh at malesuada nonummy, mi augue condimentum velit, a facilisis tortor ipsum non diam.',
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ const MessageData = [
     sent: '2021-06-15',
     size: '51kb',
     read: true,
+    body:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse ut metus. Proin venenatis turpis sit amet ante consequat semper. Aenean nunc. Duis iaculis odio id lectus. Integer dapibus justo vitae elit. Nunc luctus, tortor quis iaculis tempus, urna odio iaculis erat, imperdiet lobortis orci lectus at eros. Ut a velit id odio malesuada nonummy. Aenean cursus metus a purus. Duis dapibus odio a enim. Aliquam ut diam sed nisl imperdiet gravida. Proin eget tellus ut ante dignissim dictum. Integer ut justo quis eros feugiat convallis. Praesent massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla egestas, nibh at malesuada nonummy, mi augue condimentum velit, a facilisis tortor ipsum non diam.',
   },
   {
     id: 5,
@@ -48,6 +52,7 @@ const MessageData = [
     sent: '2021-06-15',
     size: '15kb',
     read: true,
+    body:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse ut metus. Proin venenatis turpis sit amet ante consequat semper. Aenean nunc. Duis iaculis odio id lectus. Integer dapibus justo vitae elit. Nunc luctus, tortor quis iaculis tempus, urna odio iaculis erat, imperdiet lobortis orci lectus at eros. Ut a velit id odio malesuada nonummy. Aenean cursus metus a purus. Duis dapibus odio a enim. Aliquam ut diam sed nisl imperdiet gravida. Proin eget tellus ut ante dignissim dictum. Integer ut justo quis eros feugiat convallis. Praesent massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla egestas, nibh at malesuada nonummy, mi augue condimentum velit, a facilisis tortor ipsum non diam.',
   },
   {
     id: 6,
@@ -58,6 +63,7 @@ const MessageData = [
     sent: '2021-06-15',
     size: '15kb',
     read: true,
+    body:'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse ut metus. Proin venenatis turpis sit amet ante consequat semper. Aenean nunc. Duis iaculis odio id lectus. Integer dapibus justo vitae elit. Nunc luctus, tortor quis iaculis tempus, urna odio iaculis erat, imperdiet lobortis orci lectus at eros. Ut a velit id odio malesuada nonummy. Aenean cursus metus a purus. Duis dapibus odio a enim. Aliquam ut diam sed nisl imperdiet gravida. Proin eget tellus ut ante dignissim dictum. Integer ut justo quis eros feugiat convallis. Praesent massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla egestas, nibh at malesuada nonummy, mi augue condimentum velit, a facilisis tortor ipsum non diam.',
   },
   {
     id: 7,
@@ -68,6 +74,7 @@ const MessageData = [
     sent: '2021-06-15',
     size: '15kb',
     read: true,
+    body:'Al estar escrito en un lenguaje clásico (el más usado está derivado del latín clásico) suele despertar curiosidad saber qué significa. Sin embargo el significado del texto no tiene importancia debido a que si un texto es legible los usuarios suelen centrarse en lo que dice el texto y no en el diseño, que es el objetivo en este caso.',
   },
   {
     id: 8,
@@ -78,6 +85,7 @@ const MessageData = [
     sent: '2021-06-15',
     size: '15kb',
     read: true,
+    body:'Al estar escrito en un lenguaje clásico (el más usado está derivado del latín clásico) suele despertar curiosidad saber qué significa. Sin embargo el significado del texto no tiene importancia debido a que si un texto es legible los usuarios suelen centrarse en lo que dice el texto y no en el diseño, que es el objetivo en este caso.',
   },
   {
     id: 9,
@@ -88,6 +96,7 @@ const MessageData = [
     sent: '2021-06-15',
     size: '15kb',
     read: true,
+    body:'Al estar escrito en un lenguaje clásico (el más usado está derivado del latín clásico) suele despertar curiosidad saber qué significa. Sin embargo el significado del texto no tiene importancia debido a que si un texto es legible los usuarios suelen centrarse en lo que dice el texto y no en el diseño, que es el objetivo en este caso.',
   },
   {
     id: 10,
@@ -98,6 +107,7 @@ const MessageData = [
     sent: '2021-06-15',
     size: '15kb',
     read: true,
+    body:'Al estar escrito en un lenguaje clásico (el más usado está derivado del latín clásico) suele despertar curiosidad saber qué significa. Sin embargo el significado del texto no tiene importancia debido a que si un texto es legible los usuarios suelen centrarse en lo que dice el texto y no en el diseño, que es el objetivo en este caso.',
   },
 ]
 

@@ -31,7 +31,8 @@ interface IMessage {
   subject: string;
   sent: string;
   size: string;
-  read: boolean
+  read: boolean;
+  body: string;
 }
 
 interface IMessagesItemProps {  
@@ -69,16 +70,11 @@ const MessagesItem = ({listMessage, onClick, onSelect}) => {
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
-
-  // console.log({listMessage})
-
   return(
     listMessage.map(item =>{
 
       const isItemSelected = isSelected(item.id);
       const labelId = `enhanced-table-checkbox-${item.id}`;
-
-      // console.log(labelId)
 
       return(     
 
