@@ -13,18 +13,7 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
 
 import MessageItem from "../Message/MessageItem";
-
-interface IMessage {
-  id: number;
-  importance: string;
-  attached: boolean;
-  personfor: string;
-  subject: string;
-  sent: string;
-  size: string;
-  read: boolean;
-  body: string;
-}
+import IMessage from "../../mail.interface";
 
 interface IMessageListProps {
   dataList: Array<IMessage>;

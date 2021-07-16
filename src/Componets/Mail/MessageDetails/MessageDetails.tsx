@@ -3,19 +3,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import EmailIcon from "@material-ui/icons/Email";
-import { TextField } from "@material-ui/core";
-
-interface IMessage {
-  id: number;
-  importance: string;
-  attached: boolean;
-  personfor: string;
-  subject: string;
-  sent: string;
-  size: string;
-  read: boolean;
-  body: string;
-}
+import IMessage from "../../mail.interface";
 
 interface IMessageDetailsProps {
   msg: Array<IMessage>;

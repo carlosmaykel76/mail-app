@@ -21,7 +21,7 @@ interface IMessage {
   body: string;
 }
 
-const Inbox = (Props: any) => {
+const Inbox = () => {
   const initMessageState = {
     id: 0,
     importance: "",
