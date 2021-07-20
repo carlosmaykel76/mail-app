@@ -7,5 +7,6 @@ export default interface IMessage {
   sent: string;
   size: string;
   read: boolean;
+  isdelete: boolean;
   body: string;
 }

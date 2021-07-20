@@ -3,23 +3,13 @@ import { Splitter } from "@progress/kendo-react-layout";
 
 import ToolBar from "./Layout/ToolBar";
 import ComponseForm from "./Modals/ComponseForm";
+import Collapse from "./Collapse/Collapse";
 import MessagesList from "../Componets/Mail/MessagesList/MessagesList";
 import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
 import MessageData from "../data/MessageData";
+import IMessage from "./mail.interface";
 
 import "../Styles/App.css";
-
-interface IMessage {
-  id: number;
-  importance: string;
-  attached: boolean;
-  personfor: string;
-  subject: string;
-  sent: string;
-  size: string;
-  read: boolean;
-  body: string;
-}
 
 const Inbox = () => {
   const initMessageState = {
@@ -31,10 +21,11 @@ const Inbox = () => {
     sent: "",
     size: "",
     read: false,
+    isdelete: false,
     body: "",
   };
 
-  const [allMessages, setAllMessages] = useState(false);
+  const [allMessages, setAllMessages] = useState<IMessage[]>(MessageData);
   const [visible, setVisible] = useState(false);
   const [itemSelectState, setItemSelectState] = useState<IMessage[]>([
     initMessageState,
@@ -65,11 +56,19 @@ const Inbox = () => {
   };
 
   const handleSelect = (event: React.MouseEvent<unknown>, id: number) => {
-    const filter = MessageData.filter((item) => item.id === id);
+    const msg = MessageData.filter((item) => item.id === id);
 
-    //console.log(`filter => ${JSON.stringify(filter)}`);
+    setItemSelectState(msg);
 
-    setItemSelectState(filter);
+    const newAllMessages = allMessages.map((m) => {
+      if (m.id === id) {
+        m.read = false;
+        return m;
+      }
+      return m;
+    });
+
+    setAllMessages(newAllMessages);
   };
 
   return (
@@ -78,11 +77,11 @@ const Inbox = () => {
 
       <Splitter style={{ height: 500 }} panes={panes} onChange={onChange}>
         <div className="pane-content">
-          <h3>Inner splitter / left pane</h3>
+          <Collapse />
         </div>
         <div className="pane-content">
           <MessagesList
-            dataList={MessageData}
+            dataList={allMessages}
             onClick={handleClickSelectMsg}
             onSelect={handleSelect}
           />

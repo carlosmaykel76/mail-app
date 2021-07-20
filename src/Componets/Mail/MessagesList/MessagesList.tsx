@@ -39,7 +39,7 @@ const MessageList: React.FC<IMessageListProps> = ({
 
   return (
     <TableContainer className={styles.container}>
-      <Table size="small">
+      <Table size="small" stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell padding="checkbox">
@@ -55,19 +55,25 @@ const MessageList: React.FC<IMessageListProps> = ({
             <TableCell padding="checkbox">
               <AttachFileIcon fontSize="small" />
             </TableCell>
-            <TableCell>personfor</TableCell>
-            <TableCell>subject</TableCell>
-            <TableCell>sent</TableCell>
-            <TableCell>size</TableCell>
+            <TableCell>
+              <b>De</b>
+            </TableCell>
+            <TableCell>
+              <b>Asunto</b>
+            </TableCell>
+            <TableCell>
+              <b>Recibido</b>
+            </TableCell>
+            <TableCell>
+              <b>Tamaño</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {dataList.length > 0 ? (
-            <MessageItem
-              listMessage={dataList}
-              onClick={onClick}
-              onSelect={onSelect}
-            />
+            dataList.map((item: IMessage) => (
+              <MessageItem Msg={item} onClick={onClick} onSelect={onSelect} />
+            ))
           ) : (
             <TableRow>
               <TableCell padding="checkbox"></TableCell>

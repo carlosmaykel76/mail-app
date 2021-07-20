@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { Editor, EditorTools } from "@progress/kendo-react-editor";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import EmailIcon from "@material-ui/icons/Email";
