@@ -5,7 +5,6 @@ import ComponseForm from "./Modals/ComponseForm";
 import Collapse from "./Collapse/Collapse";
 import MessagesList from "../Componets/Mail/MessagesList/MessagesList";
 import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
-import Setting from "./SettingMail/Setting";
 import MessageData from "../data/MessageData";
 import IMessage from "./mail.interface";
 
