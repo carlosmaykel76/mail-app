@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Splitter } from "@progress/kendo-react-layout";
-
 import ToolBar from "./Layout/ToolBar";
 import ComponseForm from "./Modals/ComponseForm";
 import Collapse from "./Collapse/Collapse";
 import MessagesList from "../Componets/Mail/MessagesList/MessagesList";
 import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
+import Setting from "./SettingMail/Setting";
 import MessageData from "../data/MessageData";
 import IMessage from "./mail.interface";
 
 import "../Styles/App.css";
+import WarningDialog from "./Modals/WarningDialog";
 
 const Inbox = () => {
   const initMessageState = {
@@ -17,6 +18,7 @@ const Inbox = () => {
     importance: "",
     attached: false,
     personfor: "",
+    email: "",
     subject: "",
     sent: "",
     size: "",
@@ -26,13 +28,26 @@ const Inbox = () => {
   };
 
   const [allMessages, setAllMessages] = useState<IMessage[]>(MessageData);
-  const [visible, setVisible] = useState(false);
+  const [viewCompose, setViewCompose] = useState(false);
   const [itemSelectState, setItemSelectState] = useState<IMessage[]>([
     initMessageState,
   ]);
+  const [tituloModal, setTituloModal] = useState("Nuevo Mensaje");
+  const [response, setResponse] = useState(false);
+  const [viewDialog, setViewDialog] = useState(false);
+  const [warningBody, setWarningBody] = useState("");
+  const [titleDialog, setTitleDialog] = useState("");
 
-  const toggleDialog = () => {
-    setVisible(!visible);
+  const openComposeDialog = (n: boolean, titulo: string, f: boolean) => {
+    setViewCompose(n);
+    setResponse(f);
+    setTituloModal(titulo);
+  };
+
+  const openWarningDialog = (w: boolean, title: string, body: string) => {
+    setViewDialog(w);
+    setWarningBody(body);
+    setTitleDialog(title);
   };
 
   //const CountMsg = MessageData.length;
@@ -73,7 +88,7 @@ const Inbox = () => {
 
   return (
     <>
-      <ToolBar openCompose={toggleDialog} />
+      <ToolBar openCompose={openComposeDialog} />
 
       <Splitter style={{ height: 500 }} panes={panes} onChange={onChange}>
         <div className="pane-content">
@@ -87,11 +102,33 @@ const Inbox = () => {
           />
         </div>
         <div className="pane-content">
-          <MessageDetails msg={itemSelectState} />
+          <MessageDetails
+            msg={itemSelectState}
+            openCompose={openComposeDialog}
+            openWarning={openWarningDialog}
+          />
         </div>
       </Splitter>
 
-      <div>{visible && <ComponseForm openCompose={toggleDialog} />}</div>
+      <div>
+        {viewCompose && (
+          <ComponseForm
+            openCompose={openComposeDialog}
+            titulo={tituloModal}
+            flag={response}
+            msg={itemSelectState}
+          />
+        )}
+      </div>
+      <div>
+        {viewDialog && (
+          <WarningDialog
+            titleDialog={titleDialog}
+            BodyDialog={warningBody}
+            closeWarning={openWarningDialog}
+          />
+        )}
+      </div>
     </>
   );
 };

@@ -6,6 +6,7 @@ const MessageData: Array<IMessage> = [
     importance: "baja",
     attached: true,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject:
       "Test1 Test1 Test1 Test1 Test1 Test1 Test1 Test1 Test1 Test1 Test1 Test1 Test1 ",
     sent: "2021-06-03",
@@ -19,6 +20,7 @@ const MessageData: Array<IMessage> = [
     importance: "alta",
     attached: true,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject:
       "Test2 Test2 Test2 Test2 Test2 Test2 Test2 Test2 Test2 Test2 Test2 Test2 ",
     sent: "2021-06-10",
@@ -32,6 +34,7 @@ const MessageData: Array<IMessage> = [
     importance: "normal",
     attached: true,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject:
       "Test3 Test3 Test3 Test3 Test3 Test3 Test3 Test3 Test3 Test3 Test3 Test3 Test3 ",
     sent: "2021-06-10",
@@ -45,6 +48,7 @@ const MessageData: Array<IMessage> = [
     importance: "alta",
     attached: false,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject:
       "Test4 Test4 Test4 Test4 Test4 Test4 Test4 Test4 Test4 Test4 Test4 Test4 Test4 ",
     sent: "2021-06-15",
@@ -58,6 +62,7 @@ const MessageData: Array<IMessage> = [
     importance: "alta",
     attached: false,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject: "Test5 Test5 Test5 Test5 Test5 Test5 Test5 Test5 Test5 Test5 ",
     sent: "2021-06-15",
     size: "15kb",
@@ -70,6 +75,7 @@ const MessageData: Array<IMessage> = [
     importance: "alta",
     attached: false,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject:
       "Test6 Test6 Test6 Test6 Test6 Test6 Test6 Test6 Test6 Test6 Test6 ",
     sent: "2021-06-15",
@@ -83,6 +89,7 @@ const MessageData: Array<IMessage> = [
     importance: "alta",
     attached: false,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject: "Test7 Test7 Test7 Test7 Test7 Test7 Test7 Test7 Test7 Test7 ",
     sent: "2021-06-15",
     size: "15kb",
@@ -95,6 +102,7 @@ const MessageData: Array<IMessage> = [
     importance: "alta",
     attached: false,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject: "Test8 Test8 Test8 Test8 Test8 Test8 Test8 Test8 Test8 Test8 ",
     sent: "2021-06-15",
     size: "15kb",
@@ -107,6 +115,7 @@ const MessageData: Array<IMessage> = [
     importance: "alta",
     attached: false,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject: "Test9 Test9 Test9 Test9 Test9 Test9 Test9 Test9 Test9 ",
     sent: "2021-06-15",
     size: "15kb",
@@ -119,6 +128,7 @@ const MessageData: Array<IMessage> = [
     importance: "alta",
     attached: false,
     personfor: "Chair Force",
+    email: "chair@hotmail.com",
     subject:
       "Test10 Test10 Test10 Test10 Test10 Test10 Test10 Test10 Test10 Test10 ",
     sent: "2021-06-15",
