@@ -1,13 +1,17 @@
 import React from "react";
 import EmailIcon from "@material-ui/icons/Email";
 import DeleteIcon from "@material-ui/icons/Delete";
+import MarkAsUnreadIcon from "@material-ui/icons/MarkunreadMailbox";
+//import MarkAsUnreadIcon from '@material-ui/icons/MarkAsUnread';
 import SettingsIcon from "@material-ui/icons/Settings";
 import { ButtonGroup, IconButton } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
 
-interface Props {
+interface ToolbarProps {
   openCompose: (n: boolean, t: string, f: boolean) => void;
+  openSetting: (n: boolean) => void;
+  openWarning: (w: boolean, title: string, body: string) => void;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -30,11 +34,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Toolbar: React.FC<Props> = ({ openCompose }) => {
+const Toolbar: React.FC<ToolbarProps> = ({
+  openCompose,
+  openSetting,
+  openWarning,
+}) => {
   const styles = useStyles();
 
   const openModal = () => {
     openCompose(true, "Nuevo Mensaje", false);
+  };
+
+  const showSetting = () => {
+    openSetting(true);
   };
 
   return (
@@ -56,7 +68,21 @@ const Toolbar: React.FC<Props> = ({ openCompose }) => {
           </IconButton>
         </Tooltip>
         <Tooltip title="Configura Cuenta">
-          <IconButton aria-label="setting">
+          <IconButton
+            aria-label="setting"
+            onClick={() => {
+              openWarning(
+                true,
+                "",
+                "Esta seguro de Marcar todos los Mensajes como Leidos"
+              );
+            }}
+          >
+            <MarkAsUnreadIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Configura Cuenta">
+          <IconButton aria-label="setting" onClick={showSetting}>
             <SettingsIcon />
           </IconButton>
         </Tooltip>

@@ -5,6 +5,7 @@ import ComponseForm from "./Modals/ComponseForm";
 import Collapse from "./Collapse/Collapse";
 import MessagesList from "../Componets/Mail/MessagesList/MessagesList";
 import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
+import SettingMail from "../Componets/Settings/SettingMail";
 import MessageData from "../data/MessageData";
 import IMessage from "./mail.interface";
 
@@ -35,7 +36,8 @@ const Inbox = () => {
   const [response, setResponse] = useState(false);
   const [viewDialog, setViewDialog] = useState(false);
   const [warningBody, setWarningBody] = useState("");
-  const [titleDialog, setTitleDialog] = useState("");
+  const [warningTitle, setWarningTitle] = useState("Confirmación");
+  const [viewSetting, SetViewSetting] = useState(false);
 
   const openComposeDialog = (n: boolean, titulo: string, f: boolean) => {
     setViewCompose(n);
@@ -46,7 +48,11 @@ const Inbox = () => {
   const openWarningDialog = (w: boolean, title: string, body: string) => {
     setViewDialog(w);
     setWarningBody(body);
-    setTitleDialog(title);
+    setWarningTitle(title === "" ? warningTitle : title);
+  };
+
+  const openSettingModel = (s: boolean) => {
+    SetViewSetting(s);
   };
 
   //const CountMsg = MessageData.length;
@@ -87,7 +93,11 @@ const Inbox = () => {
 
   return (
     <>
-      <ToolBar openCompose={openComposeDialog} />
+      <ToolBar
+        openCompose={openComposeDialog}
+        openSetting={openSettingModel}
+        openWarning={openWarningDialog}
+      />
 
       <Splitter style={{ height: 500 }} panes={panes} onChange={onChange}>
         <div className="pane-content">
@@ -122,11 +132,14 @@ const Inbox = () => {
       <div>
         {viewDialog && (
           <WarningDialog
-            titleDialog={titleDialog}
+            titleDialog={warningTitle}
             BodyDialog={warningBody}
             closeWarning={openWarningDialog}
           />
         )}
+      </div>
+      <div>
+        {viewSetting && <SettingMail closeSetting={openSettingModel} />}
       </div>
     </>
   );

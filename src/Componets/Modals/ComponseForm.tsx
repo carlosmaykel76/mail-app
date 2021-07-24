@@ -19,9 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
       width: "100%",
-      height: "600",
-      background: "white",
-      padding: "16px, 32px, 24px",
+      height: "100%",
+      padding: "16px, 24px, 24px",
     },
     TextField: {
       width: "100%",
@@ -59,8 +58,10 @@ const ComponseForm: React.FC<Props> = ({ openCompose, titulo, flag, msg }) => {
       <Window
         title={titulo}
         onClose={closeComposeDialog}
-        initialHeight={600}
+        initialHeight={500}
         initialWidth={800}
+        modal
+        resizable={false}
       >
         <div className={styles.modal}>
           <Grid container spacing={1}>
@@ -70,6 +71,7 @@ const ComponseForm: React.FC<Props> = ({ openCompose, titulo, flag, msg }) => {
             <Grid item xs={11}>
               <TextField
                 id="to"
+                size="small"
                 className={styles.TextField}
                 value={flag ? msg[0]["email"] : ""}
               />
@@ -78,7 +80,11 @@ const ComponseForm: React.FC<Props> = ({ openCompose, titulo, flag, msg }) => {
               <label>Asunto:</label>
             </Grid>
             <Grid item xs={11}>
-              <TextField id="subject" className={styles.TextField} />
+              <TextField
+                id="subject"
+                className={styles.TextField}
+                size="small"
+              />
             </Grid>
             <Grid item xs={12}>
               <KendoEditor />
