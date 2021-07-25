@@ -3,20 +3,25 @@ import { ButtonGroup, IconButton } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
 
-import EmailIcon from "@material-ui/icons/Email";
+import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import editIcon from "@material-ui/icons/ExitToApp";
+import EditIcon from "@material-ui/icons/Edit";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import SaveIcon from "@material-ui/icons/Save";
+import UndoIcon from "@material-ui/icons/Undo";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 interface ToolBarSettingProps {
   closeSetting: (n: boolean) => void;
+  openWarning: (w: boolean, title: string, body: string) => void;
 }
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     width: "100%",
     height: "30px",
-    border: "1px solid #000",
+    border: "1px solid #c0c0c0",
     padding: "2px 0px 0px 0px",
     //padding: 'top right bottom left'
   },
@@ -31,11 +36,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ToolBarSetting: React.FC<ToolBarSettingProps> = ({ closeSetting }) => {
+const ToolBarSetting: React.FC<ToolBarSettingProps> = ({
+  closeSetting,
+  openWarning,
+}) => {
   const styles = useStyles();
 
   const close = () => {
     closeSetting(false);
+  };
+
+  const handleClick = () => {
+    openWarning(
+      true,
+      "Confirmación",
+      "Desea Realizar la Operación Seleccionada."
+    );
   };
 
   return (
@@ -46,18 +62,43 @@ const ToolBarSetting: React.FC<ToolBarSettingProps> = ({ closeSetting }) => {
         className={styles.group}
         aria-label="text primary button group"
       >
-        <Tooltip title="Salir">
-          <IconButton aria-label="exit">
-            <EmailIcon />
+        <Tooltip title="Editar">
+          <IconButton aria-label="editar" onClick={handleClick}>
+            <EditIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Salir">
-          <IconButton aria-label="exit">
+        <Tooltip title="Nuevo">
+          <IconButton aria-label="nuevo" onClick={handleClick}>
+            <NoteAddIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Copiar">
+          <IconButton aria-label="copiar" onClick={handleClick}>
+            <FileCopyIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Eliminar">
+          <IconButton aria-label="eliminar" onClick={handleClick}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
+        <Tooltip title="Salvar">
+          <IconButton aria-label="salvar" onClick={handleClick}>
+            <SaveIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Deshacer">
+          <IconButton aria-label="deshacer" onClick={handleClick}>
+            <UndoIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Favorito">
+          <IconButton aria-label="favorito" onClick={handleClick}>
+            <FavoriteIcon />
+          </IconButton>
+        </Tooltip>
         <Tooltip title="Salir">
-          <IconButton aria-label="exit" onClick={close}>
+          <IconButton aria-label="salir" onClick={close}>
             <ExitToAppIcon />
           </IconButton>
         </Tooltip>
