@@ -15,6 +15,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 interface ToolBarSettingProps {
   closeSetting: (n: boolean) => void;
   openWarning: (w: boolean, title: string, body: string) => void;
+  isSelect: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const ToolBarSetting: React.FC<ToolBarSettingProps> = ({
   closeSetting,
   openWarning,
+  isSelect,
 }) => {
   const styles = useStyles();
 
@@ -63,7 +65,11 @@ const ToolBarSetting: React.FC<ToolBarSettingProps> = ({
         aria-label="text primary button group"
       >
         <Tooltip title="Editar">
-          <IconButton aria-label="editar" onClick={handleClick}>
+          <IconButton
+            aria-label="editar"
+            onClick={handleClick}
+            disabled={!isSelect ? true : false}
+          >
             <EditIcon />
           </IconButton>
         </Tooltip>
@@ -73,12 +79,20 @@ const ToolBarSetting: React.FC<ToolBarSettingProps> = ({
           </IconButton>
         </Tooltip>
         <Tooltip title="Copiar">
-          <IconButton aria-label="copiar" onClick={handleClick}>
+          <IconButton
+            aria-label="copiar"
+            onClick={handleClick}
+            disabled={!isSelect ? true : false}
+          >
             <FileCopyIcon />
           </IconButton>
         </Tooltip>
         <Tooltip title="Eliminar">
-          <IconButton aria-label="eliminar" onClick={handleClick}>
+          <IconButton
+            aria-label="eliminar"
+            onClick={handleClick}
+            disabled={!isSelect ? true : false}
+          >
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -93,7 +107,11 @@ const ToolBarSetting: React.FC<ToolBarSettingProps> = ({
           </IconButton>
         </Tooltip>
         <Tooltip title="Favorito">
-          <IconButton aria-label="favorito" onClick={handleClick}>
+          <IconButton
+            aria-label="favorito"
+            onClick={handleClick}
+            disabled={!isSelect ? true : false}
+          >
             <FavoriteIcon />
           </IconButton>
         </Tooltip>

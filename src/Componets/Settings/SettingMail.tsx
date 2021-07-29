@@ -3,11 +3,13 @@ import { Window } from "@progress/kendo-react-dialogs";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Grid, Paper, TextField, Checkbox } from "@material-ui/core";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+
 import ToolBarSetting from "./ToolBarSetting";
 import DataView from "./DataView";
 import WarningDialog from "../Modals/WarningDialog";
-
 import ServerConfig from "./ServerConfig";
+
+import * as Data from "../../data/AccountMailData";
 
 interface SettingMailProps {
   closeSetting: (n: boolean) => void;
@@ -20,14 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "700",
       background: "white",
       padding: "2px, 4px, 4px, 4px",
-      //padding: 'top right bottom left'
     },
     TextField: {
       padding: "0pt 0pt 1pt 0pt",
       width: "100%",
-    },
-    CardHeader: {
-      padding: "0pt 0pt 1pt 0pt",
     },
   })
 );
@@ -35,6 +33,33 @@ const useStyles = makeStyles((theme: Theme) =>
 const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
   const styles = useStyles();
 
+  const initAccountMail = {
+    id: 0,
+    fav: false,
+    cuenta: "",
+    usuario: "",
+    servidor: "",
+    imapServer: "",
+    imapPort: 0,
+    imapUser: "",
+    imapPwd: "",
+    imapCifrado: "",
+    smtpServer: "",
+    smtpPort: 0,
+    smtpUser: "",
+    smtpPwd: "",
+    smptCifrado: "",
+  };
+
+  const [allConfigMail, SetAllConfigMail] = useState<Data.IAccountMail[]>(
+    Data.AccountMailData
+  );
+
+  const [itemSelectState, setItemSelectState] = useState<Data.IAccountMail[]>([
+    initAccountMail,
+  ]);
+
+  const [editConfigMail, setEditConfigMail] = useState(false);
   const [viewDialog, setViewDialog] = useState(false);
   const [warningBody, setWarningBody] = useState("");
   const [warningTitle, setWarningTitle] = useState("Confirmación");
@@ -43,10 +68,17 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
     closeSetting(false);
   };
 
-  const openWarningDialog = (w: boolean, title: string, body: string) => {
-    setViewDialog(w);
+  const openWarningDialog = (flag: boolean, title: string, body: string) => {
+    setViewDialog(flag);
     setWarningBody(body);
     setWarningTitle(title === "" ? warningTitle : title);
+  };
+
+  const handleOnSelect = (id: number) => {
+    const config = Data.AccountMailData.filter((item) => item.id === id);
+
+    setItemSelectState(config);
+    setEditConfigMail(true);
   };
 
   return (
@@ -64,6 +96,7 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
             <ToolBarSetting
               closeSetting={closeSettingModel}
               openWarning={openWarningDialog}
+              isSelect={editConfigMail}
             />
           </Grid>
           <Grid item xs={6}>
@@ -89,7 +122,7 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <DataView />
+            <DataView dataList={allConfigMail} onSelect={handleOnSelect} />
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -158,7 +191,10 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
               className={styles.TextField}
             />
           </Grid>
-          <ServerConfig />
+          <ServerConfig
+            editConfig={editConfigMail}
+            configSelect={itemSelectState}
+          />
         </Grid>
       </div>
       <div>

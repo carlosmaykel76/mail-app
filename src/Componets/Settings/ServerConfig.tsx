@@ -3,9 +3,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Grid, TextField, MenuItem } from "@material-ui/core";
+import * as Data from "../../data/AccountMailData";
 
 interface ServerConfigProps {
-  //flag: boolean;
+  editConfig: boolean;
+  configSelect: Array<Data.IAccountMail>;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -42,10 +44,14 @@ const cifrados = [
   },
 ];
 
-const ServerConfig: React.FC<ServerConfigProps> = () => {
+const ServerConfig: React.FC<ServerConfigProps> = (
+  editConfig,
+  configSelect
+) => {
   const styles = useStyles();
   const [imapCifrado, setImapCifrado] = React.useState("auto");
   const [smtpCifrado, setSmtpCifrado] = React.useState("auto");
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [newEdit, setNewEdit] = React.useState(true);
 
   const handleChangeImap = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +75,7 @@ const ServerConfig: React.FC<ServerConfigProps> = () => {
               id="imap_server"
               variant="outlined"
               size="small"
+              //value={editConfig ? configSelect["imapServer"] : ""}
               className={styles.TextField}
               disabled={newEdit}
             />
@@ -128,7 +135,7 @@ const ServerConfig: React.FC<ServerConfigProps> = () => {
               variant="outlined"
               size="small"
               className={styles.TextField}
-              disabled={newEdit}
+              disabled={editConfig === false ? true : false}
             />
             <TextField
               label="Puerto"
@@ -136,7 +143,7 @@ const ServerConfig: React.FC<ServerConfigProps> = () => {
               variant="outlined"
               size="small"
               className={styles.TextField}
-              disabled={newEdit}
+              disabled={editConfig ? true : false}
             />
             <TextField
               label="Usuario"
@@ -144,7 +151,7 @@ const ServerConfig: React.FC<ServerConfigProps> = () => {
               variant="outlined"
               size="small"
               className={styles.TextField}
-              disabled={newEdit}
+              disabled={editConfig ? true : false}
             />
             <TextField
               label="Contraseña"
@@ -152,7 +159,7 @@ const ServerConfig: React.FC<ServerConfigProps> = () => {
               variant="outlined"
               size="small"
               className={styles.TextField}
-              disabled={newEdit}
+              disabled={editConfig ? true : false}
             />
             <TextField
               id="smtp_cifrado"
@@ -163,7 +170,7 @@ const ServerConfig: React.FC<ServerConfigProps> = () => {
               variant="outlined"
               size="small"
               className={styles.TextField}
-              disabled={newEdit}
+              disabled={editConfig ? true : false}
             >
               {cifrados.map((option) => (
                 <MenuItem key={option.value} value={option.value}>

@@ -2,9 +2,14 @@ import React from "react";
 import { Grid, Paper } from "@material-ui/core";
 import { Table, TableBody, TableCell } from "@material-ui/core";
 import { TableContainer, TableHead, TableRow } from "@material-ui/core";
-import TableView from "material-table";
 import { makeStyles } from "@material-ui/core/styles";
-import data from "../../data/AccountMailData";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import * as Data from "../../data/AccountMailData";
+
+interface DataViewProps {
+  dataList: Array<Data.IAccountMail>;
+  onSelect: (id: number) => void;
+}
 
 interface IDataView {
   id: number;
@@ -14,42 +19,22 @@ interface IDataView {
   servidor: string;
 }
 
-interface IColumns {
-  title: string;
-  field: string;
-}
-
-const columns: Array<IColumns> = [
-  { title: "Fav", field: "fav" },
-  { title: "Cuenta", field: "cuenta" },
-  { title: "Usuario", field: "usuario" },
-  { title: "Servidor", field: "servidor" },
-];
-
 const useStyles = makeStyles({
   container: {
-    maxHeight: 440,
-  },
-  cellIcon: {
-    width: "1%",
+    maxHeight: 400,
   },
 });
 
-const DataView = () => {
+const DataView: React.FC<DataViewProps> = ({ dataList, onSelect }) => {
   const styles = useStyles();
+
+  const handleOnSelect = (event: any, id: number) => {
+    onSelect(id);
+  };
 
   return (
     <Grid item xs={12}>
       <Paper>
-        {/*         <TableView
-          columns={[
-            { title: "Fav", field: "fav", type: "boolean" },
-            { title: "Cuenta", field: "cuenta" },
-            { title: "Usuario", field: "usuario" },
-            { title: "Servidor", field: "servidor" },
-          ]}
-          data={data}
-        /> */}
         <TableContainer className={styles.container}>
           <Table size="small" stickyHeader aria-label="a dense table">
             <TableHead>
@@ -61,10 +46,14 @@ const DataView = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.length > 0 ? (
-                data.map((item: IDataView) => (
-                  <TableRow key={item.id} hover>
-                    <TableCell>{item.fav}</TableCell>
+              {dataList.length > 0 ? (
+                dataList.map((item: IDataView) => (
+                  <TableRow
+                    key={item.id}
+                    hover
+                    onClick={(event) => handleOnSelect(event, item.id)}
+                  >
+                    <TableCell>{item.fav ? <FavoriteIcon /> : " "}</TableCell>
                     <TableCell>{item.cuenta}</TableCell>
                     <TableCell>{item.usuario}</TableCell>
                     <TableCell>{item.servidor}</TableCell>

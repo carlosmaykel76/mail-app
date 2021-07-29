@@ -1,4 +1,4 @@
-interface IAccountMail {
+export interface IAccountMail {
   id: number;
   fav: boolean;
   cuenta: string;
@@ -16,23 +16,41 @@ interface IAccountMail {
   smptCifrado: string;
 }
 
-const AccountMailData: Array<IAccountMail> = [
+/* export const initAccountMail = {
+  id: 0,
+  fav: false,
+  cuenta: "",
+  usuario: "",
+  servidor: "",
+  imapServer: "",
+  imapPort: 0,
+  imapUser: "",
+  imapPwd: "",
+  imapCifrado: "",
+  smtpServer: "",
+  smtpPort: 0,
+  smtpUser: "",
+  smtpPwd: "",
+  smptCifrado: "",
+}; */
+
+export const AccountMailData: Array<IAccountMail> = [
   {
     id: 1,
     fav: true,
     cuenta: "pepe@gmail.com",
     usuario: "pepe",
     servidor: "10.12.5.2",
-    imapServer: "",
+    imapServer: "10.12.5.2",
     imapPort: 993,
-    imapUser: "",
-    imapPwd: "",
-    imapCifrado: "",
-    smtpServer: "",
+    imapUser: "pepe",
+    imapPwd: "123456aA",
+    imapCifrado: "Auto",
+    smtpServer: "10.12.5.2",
     smtpPort: 565,
-    smtpUser: "",
-    smtpPwd: "",
-    smptCifrado: "",
+    smtpUser: "pepe",
+    smtpPwd: "123456aA",
+    smptCifrado: "Auto",
   },
   {
     id: 2,
@@ -40,16 +58,16 @@ const AccountMailData: Array<IAccountMail> = [
     cuenta: "carlos.lopez@telematel.com",
     usuario: "carlos.lopez",
     servidor: "10.235.1.201",
-    imapServer: "",
+    imapServer: "10.235.1.201",
     imapPort: 993,
-    imapUser: "",
-    imapPwd: "",
-    imapCifrado: "SSL",
-    smtpServer: "",
+    imapUser: "carlos.lopez",
+    imapPwd: "123456aA",
+    imapCifrado: "STARTTLS",
+    smtpServer: "10.235.1.201",
     smtpPort: 565,
-    smtpUser: "",
-    smtpPwd: "",
-    smptCifrado: "SSL",
+    smtpUser: "carlos.lopez",
+    smtpPwd: "123456aA",
+    smptCifrado: "STARTTLS",
   },
   {
     id: 3,
@@ -57,17 +75,17 @@ const AccountMailData: Array<IAccountMail> = [
     cuenta: "gelsy.crego@telematel.com",
     usuario: "gelsy.crego",
     servidor: "10.235.1.201",
-    imapServer: "",
+    imapServer: "10.235.1.201",
     imapPort: 993,
-    imapUser: "",
-    imapPwd: "",
+    imapUser: "gelsy.crego",
+    imapPwd: "123456aA",
     imapCifrado: "SSL",
-    smtpServer: "",
+    smtpServer: "10.235.1.201",
     smtpPort: 565,
-    smtpUser: "",
-    smtpPwd: "",
+    smtpUser: "gelsy.crego",
+    smtpPwd: "123456aA",
     smptCifrado: "SSL",
   },
 ];
 
-export default AccountMailData;
+//export default AccountMailData;

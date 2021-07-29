@@ -67,7 +67,12 @@ const MessageList: React.FC<IMessageListProps> = ({
           <TableBody>
             {dataList.length > 0 ? (
               dataList.map((item: IMessage) => (
-                <MessageItem Msg={item} onClick={onClick} onSelect={onSelect} />
+                <MessageItem
+                  key={item.id}
+                  Msg={item}
+                  onClick={onClick}
+                  onSelect={onSelect}
+                />
               ))
             ) : (
               <TableRow>

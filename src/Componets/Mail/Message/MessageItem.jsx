@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 
 });
 
-const MessagesItem = ({Msg, onClick, onSelect}) => {
+const MessagesItem = ({key, Msg, onClick, onSelect}) => {
 
   const styles = useStyles();
 
@@ -46,7 +46,6 @@ const MessagesItem = ({Msg, onClick, onSelect}) => {
         selected.slice(selectedIndex + 1),
       );
     }
-    console.log(newSelected);
     setSelected(newSelected);
   };
 
@@ -56,7 +55,7 @@ const MessagesItem = ({Msg, onClick, onSelect}) => {
 
   return(
    
-    <TableRow key={Msg.id} hover >
+    <TableRow key={key} hover >
       <TableCell padding="checkbox">
         <Checkbox size='small'                  
           checked={isItemSelected}

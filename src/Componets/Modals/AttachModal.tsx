@@ -45,7 +45,7 @@ interface attachModalProps {
 
 const AttachModal: React.FC<attachModalProps> = ({ openAttach }) => {
   const styles = useStyles();
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [viewAttach, SetViewAttach] = React.useState(true);
 
   const closeComposeDialog = () => {
