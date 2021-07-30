@@ -61,7 +61,8 @@ const ComponseForm: React.FC<Props> = ({ openCompose, titulo, flag, msg }) => {
         initialHeight={500}
         initialWidth={800}
         modal
-        resizable={false}
+        resizable
+        draggable
       >
         <div className={styles.modal}>
           <Grid container spacing={1}>

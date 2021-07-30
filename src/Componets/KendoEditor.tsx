@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { Editor, EditorTools } from "@progress/kendo-react-editor";
 
 const {
@@ -6,6 +7,8 @@ const {
   Italic,
   Underline,
   Strikethrough,
+  Subscript,
+  Superscript,
   AlignLeft,
   AlignCenter,
   AlignRight,
@@ -22,6 +25,7 @@ const {
   Link,
   Unlink,
   InsertImage,
+  ViewHtml,
   InsertTable,
   AddRowBefore,
   AddRowAfter,
@@ -39,6 +43,7 @@ const KendoEditor = () => {
     <Editor
       tools={[
         [Bold, Italic, Underline, Strikethrough],
+        [Subscript, Superscript],
         [AlignLeft, AlignCenter, AlignRight, AlignJustify],
         [Indent, Outdent],
         [OrderedList, UnorderedList],
@@ -46,13 +51,14 @@ const KendoEditor = () => {
         FontName,
         FormatBlock,
         [Undo, Redo],
-        [Link, Unlink, InsertImage],
+        [Link, Unlink, InsertImage, ViewHtml],
         [InsertTable],
         [AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter],
         [DeleteRow, DeleteColumn, DeleteTable],
         [MergeCells, SplitCell],
       ]}
-      contentStyle={{ height: 200 }}
+      contentStyle={{ height: 630 }}
+      //defaultContent={content}
     />
   );
 };
