@@ -43,21 +43,21 @@ const KendoEditor = () => {
     <Editor
       tools={[
         [Bold, Italic, Underline, Strikethrough],
-        [Subscript, Superscript],
+        //[Subscript, Superscript],
         [AlignLeft, AlignCenter, AlignRight, AlignJustify],
         [Indent, Outdent],
         [OrderedList, UnorderedList],
+        [DeleteRow, DeleteColumn, DeleteTable],
+        [MergeCells, SplitCell],
+        [InsertTable],
+        [AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter],
         FontSize,
         FontName,
         FormatBlock,
         [Undo, Redo],
         [Link, Unlink, InsertImage, ViewHtml],
-        [InsertTable],
-        [AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter],
-        [DeleteRow, DeleteColumn, DeleteTable],
-        [MergeCells, SplitCell],
       ]}
-      contentStyle={{ height: 630 }}
+      contentStyle={{ height: 200 }}
       //defaultContent={content}
     />
   );

@@ -74,7 +74,8 @@ const MessageDetails: React.FC<IMessageDetailsProps> = ({
   return msg[0]["id"] === 0 ? (
     <Grid container>
       <Grid item xs={12} className={styles.paperInit}>
-        <KendoEditor />
+        <EmailIcon />
+        <h2>Seleccione un Mensaje para visualizarlo aquí</h2>
       </Grid>
     </Grid>
   ) : (
