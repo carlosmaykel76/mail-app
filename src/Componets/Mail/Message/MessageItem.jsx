@@ -1,88 +1,144 @@
-import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {TableRow, TableCell, Checkbox} from '@material-ui/core';
+import React, { useState } from "react";
+import { ButtonGroup, Grid, IconButton } from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Checkbox from "@material-ui/core/Checkbox";
+import {msgEliminar} from "../../parameters";
 
-import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
+import DeleteIcon from "@material-ui/icons/Delete";
+import FlagIcon from "@material-ui/icons/Flag";
+import EmailIcon from "@material-ui/icons/Email";
+import CheckIcon from "@material-ui/icons/Check";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
+import AttachFileIcon from "@material-ui/icons/AttachFile";
+//import CircleOutlinedIcon from '@material-ui/icons/CircleOutlined';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-    
+const useStyles = makeStyles({  
+  paper: {   
+    width:"99%",
+    height: "auto",
   },
-  unread: {   
-    fontWeight:'bold',
+  paperOver: {
+    width: "99%",
+    height: "auto",
+    backgroundColor: "#d1eaf3",
+    cursor:'pointer',
   },
-  read: {   
-    fontWeight:'normal',
+  image: {
+    width: 128,
+    height: 128,
   },
-  cellIcon:{
-    width: '1%',
-  }
-
+  img: {
+    margin: "auto",
+    display: "block",
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
+  hidden: {
+    display: "none",
+  },
+  show: {
+    display: "block",
+  },
 });
 
-const MessagesItem = ({key, Msg, onClick, onSelect}) => {
-
+const MessageItem = ({ key, msg, onSelect, openWarning }) => {
   const styles = useStyles();
 
-  const [selected, setSelected] = useState([]);
+  const [showBar, setShowBar] = useState(false);
+  const [selectItem, setSelectItem] = useState(false);
 
-  const handleClick = (event, id) => {
-
-    alert('click en el elemento');
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-    setSelected(newSelected);
+  const handleOverMouse = () => {
+    setShowBar(true);
   };
 
-  const isSelected = (id) => selected.indexOf(id) !== -1;
-  const isItemSelected = isSelected(Msg.id);
-  const labelId = `enhanced-table-checkbox-${Msg.id}`;
+  const handleMouseOut = () => {
+    setShowBar(false);
+  };
 
-  return(
-   
-    <TableRow key={key} hover >
-      <TableCell padding="checkbox">
-        <Checkbox size='small'                  
-          checked={isItemSelected}
-          inputProps={{ 'aria-labelledby': labelId }}            
-          onClick={(event) => handleClick(event, Msg.id)}
-        />
-      </TableCell>
-      <TableCell padding="checkbox">
-        {(Msg.importance==='alta')?<PriorityHighIcon fontSize="small" color="primary"/>:''}
-      </TableCell>
-      <TableCell padding="checkbox" >
-        {(Msg.attached)?<AttachFileIcon fontSize="small" color="primary"/>:''}
-      </TableCell>
-      <TableCell onClick={(event) => onSelect(event, Msg.id)} className={(Msg.read)?styles.unread:styles.read}>
-        {Msg.personfor}
-      </TableCell>
-      <TableCell onClick={(event) => onSelect(event, Msg.id)} className={(Msg.read)?styles.unread:styles.read}>
-        {Msg.subject}
-      </TableCell>
-      <TableCell onClick={(event) => onSelect(event, Msg.id)} className={(Msg.read)?styles.unread:styles.read}>
-        {Msg.sent}
-      </TableCell>
-      <TableCell onClick={(event) => onSelect(event, Msg.id)} className={(Msg.read)?styles.unread:styles.read}>
-        {Msg.size}
-      </TableCell>              
-    </TableRow>
+  const handleChange = (event) => {   
+    event.target.checked ? setSelectItem(true):  setSelectItem(false)
+  };
+
+  const handleClick = (body) => {    
+    openWarning(true, "", body);
+  }
+
+  return (
+    <Paper
+      className={showBar || selectItem ? styles.paperOver : styles.paper}
+      onMouseOver={handleOverMouse}
+      onMouseOut={handleMouseOut}      
+    >
+      <Grid container spacing={1}>
+        <Grid item>
+          <div className={showBar ? styles.hidden : styles.show}>
+            <AccountCircleIcon fontSize="large" />
+          </div>
+          <div className={showBar ? styles.show : styles.hidden}>          
+            <Checkbox icon={<CheckBoxOutlineBlankIcon />} 
+              checked={selectItem}  
+              checkedIcon={<CheckCircleIcon color="primary" />} 
+              color="default" 
+              name={"chkMsg-"+ msg.id} 
+              onChange={handleChange}
+            />
+          </div>
+        </Grid>
+        <Grid item xs={12} sm container>
+          <Grid item xs container direction="column" spacing={2} onClick={(event) => onSelect(event, msg.id)}>
+            <Grid item xs>
+              <Typography variant="subtitle1" >
+                <b>{msg.personfor}</b>
+              </Typography>
+              <Typography variant="body2" color="primary">
+                <b>{msg.subject.substr(0, 40)+" ..." }</b>
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                { msg.body.substr(0, 60)+" ..." }
+              </Typography>
+            </Grid>
+            <Grid item></Grid>
+          </Grid>
+          <Grid item>
+            <div className={showBar ? styles.hidden : styles.show}>
+              {(msg.importance==='alta') ? <PriorityHighIcon fontSize="small" color="primary"/> : ''}             
+              {(msg.attached) ? <AttachFileIcon fontSize="small" color="primary"/> : ''}
+            </div>
+            <div className={showBar ? styles.show : styles.hidden} >
+              <ButtonGroup size="small">
+                <Tooltip title="Eliminar">
+                  <IconButton>
+                    <DeleteIcon fontSize="small"/>
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Marcar como no leído">
+                  <IconButton >
+                    <EmailIcon fontSize="small"/>
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Marcar este mensaje">
+                  <IconButton>
+                    <FlagIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Dejar este mensaje en la parte superior de la carpeta">
+                  <IconButton>
+                    <CheckIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              </ButtonGroup>
+            </div>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Paper>
   );
-}
+};
 
-export default MessagesItem
+export default MessageItem;

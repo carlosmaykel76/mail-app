@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import { Editor, EditorTools } from "@progress/kendo-react-editor";
 
 const {
@@ -7,8 +6,6 @@ const {
   Italic,
   Underline,
   Strikethrough,
-  Subscript,
-  Superscript,
   AlignLeft,
   AlignCenter,
   AlignRight,

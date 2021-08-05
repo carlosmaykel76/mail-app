@@ -2,7 +2,7 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { Grid, TextField, MenuItem, Paper } from "@material-ui/core";
+import { Grid, TextField, MenuItem } from "@material-ui/core";
 import * as Data from "../../data/AccountMailData";
 
 interface ServerConfigProps {

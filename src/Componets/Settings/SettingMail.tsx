@@ -51,6 +51,7 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
     smptCifrado: "",
   };
 
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [allConfigMail, SetAllConfigMail] = useState<Data.IAccountMail[]>(
     Data.AccountMailData
   );

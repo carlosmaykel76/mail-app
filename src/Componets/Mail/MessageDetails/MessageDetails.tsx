@@ -9,7 +9,6 @@ import IMessage from "../../mail.interface";
 import ReplyIcon from "@material-ui/icons/Reply";
 import ReplyAllIcon from "@material-ui/icons/ReplyAll";
 import DeleteIcon from "@material-ui/icons/Delete";
-import KendoEditor from "../../KendoEditor";
 
 interface IMessageDetailsProps {
   msg: Array<IMessage>;
@@ -127,7 +126,9 @@ const MessageDetails: React.FC<IMessageDetailsProps> = ({
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={styles.paperBody}>{msg[0]["body"]}</Paper>
+          <Paper className={styles.paperBody}>
+            <div dangerouslySetInnerHTML={{ __html: msg[0]["body"] }} />
+          </Paper>
         </Grid>
       </Grid>
     </>

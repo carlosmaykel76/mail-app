@@ -8,9 +8,8 @@ import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
 import SettingMail from "../Componets/Settings/SettingMail";
 import MessageData from "../data/MessageData";
 import IMessage from "./mail.interface";
-
-import "../Styles/App.css";
 import WarningDialog from "./Modals/WarningDialog";
+import "../Styles/App.css";
 
 const Inbox = () => {
   const initMessageState = {

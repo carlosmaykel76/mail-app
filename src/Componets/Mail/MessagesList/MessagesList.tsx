@@ -1,13 +1,8 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Checkbox, Table, TableBody, TableCell } from "@material-ui/core";
-import { TableContainer, TableHead, TableRow } from "@material-ui/core";
+import React, { useState } from "react";
 
-import AttachFileIcon from "@material-ui/icons/AttachFile";
-import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
-
-import MessageItem from "../Message/MessageItem";
 import IMessage from "../../mail.interface";
+import MessageItem from "../Message/MessageItem";
+import WarningDialog from "../../Modals/WarningDialog";
 
 interface IMessageListProps {
   dataList: Array<IMessage>;
@@ -15,79 +10,44 @@ interface IMessageListProps {
   onSelect: (event: React.MouseEvent<unknown>, id: number) => void;
 }
 
-const useStyles = makeStyles({
-  container: {
-    maxHeight: 440,
-  },
-  cellIcon: {
-    width: "1%",
-  },
-});
-
 const MessageList: React.FC<IMessageListProps> = ({
   dataList,
   onClick,
   onSelect,
 }) => {
-  const styles = useStyles();
+  const [viewDialog, setViewDialog] = useState(false);
+  const [warningBody, setWarningBody] = useState("");
+  const [warningTitle, setWarningTitle] = useState("Confirmación");
+
+  const openWarningDialog = (w: boolean, title: string, body: string) => {
+    setViewDialog(w);
+    setWarningBody(body);
+    setWarningTitle(title === "" ? warningTitle : title);
+  };
 
   return (
     <>
-      <TableContainer className={styles.container}>
-        <Table size="small" stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  size="small"
-                  inputProps={{ "aria-label": "select all desserts" }}
-                  onClick={(event) => onClick(event, 0)}
-                />
-              </TableCell>
-              <TableCell padding="checkbox">
-                <PriorityHighIcon fontSize="small" />
-              </TableCell>
-              <TableCell padding="checkbox">
-                <AttachFileIcon fontSize="small" />
-              </TableCell>
-              <TableCell>
-                <b>De</b>
-              </TableCell>
-              <TableCell>
-                <b>Asunto</b>
-              </TableCell>
-              <TableCell>
-                <b>Recibido</b>
-              </TableCell>
-              <TableCell>
-                <b>Tamaño</b>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {dataList.length > 0 ? (
-              dataList.map((item: IMessage) => (
-                <MessageItem
-                  key={item.id}
-                  Msg={item}
-                  onClick={onClick}
-                  onSelect={onSelect}
-                />
-              ))
-            ) : (
-              <TableRow>
-                <TableCell padding="checkbox"></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {dataList.length > 0 ? (
+        dataList.map((item: IMessage) => (
+          <MessageItem
+            key={item.id}
+            msg={item}
+            onSelect={onSelect}
+            openWarning={openWarningDialog}
+          />
+        ))
+      ) : (
+        <div>dfcsdfsdjcnbsjdkbh</div>
+      )}
+      <div>
+        {viewDialog && (
+          <WarningDialog
+            titleDialog={warningTitle}
+            BodyDialog={warningBody}
+            closeWarning={openWarningDialog}
+          />
+        )}
+      </div>
     </>
   );
 };
