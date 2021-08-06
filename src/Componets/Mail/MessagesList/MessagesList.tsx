@@ -25,16 +25,13 @@ const MessageList: React.FC<IMessageListProps> = ({
     setWarningTitle(title === "" ? warningTitle : title);
   };
 
+  const selectAllCheckboxes = () => {};
+
   return (
     <>
       {dataList.length > 0 ? (
         dataList.map((item: IMessage) => (
-          <MessageItem
-            key={item.id}
-            msg={item}
-            onSelect={onSelect}
-            openWarning={openWarningDialog}
-          />
+          <MessageItem msg={item} onSelect={onSelect} onChecker={onClick} />
         ))
       ) : (
         <div>dfcsdfsdjcnbsjdkbh</div>

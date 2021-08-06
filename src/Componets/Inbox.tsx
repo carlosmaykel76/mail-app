@@ -37,6 +37,7 @@ const Inbox = () => {
   const [warningBody, setWarningBody] = useState("");
   const [warningTitle, setWarningTitle] = useState("Confirmación");
   const [viewSetting, SetViewSetting] = useState(false);
+  const [countSelect, SetCountSelect] = useState(0);
 
   const openComposeDialog = (n: boolean, titulo: string, f: boolean) => {
     setViewCompose(n);
@@ -59,7 +60,7 @@ const Inbox = () => {
   const [panes, setPanes] = useState([
     { size: "15%", min: "150px", collapsible: false },
     {},
-    { size: "30%", min: "20px", collapsible: true },
+    { size: "40%", min: "20px", collapsible: true },
   ]);
 
   const onChange = (event: any) => {
@@ -70,8 +71,13 @@ const Inbox = () => {
     event: React.MouseEvent<unknown>,
     id: number
   ) => {
-    //const isItemSelected = true;
-    alert("Esto id del msg " + id);
+    if (id !== 0) {
+      SetCountSelect(countSelect + 1);
+    } else {
+      SetCountSelect(countSelect - 1);
+    }
+
+    //alert("Esto id del msg " + countSelect);
   };
 
   const handleSelect = (event: React.MouseEvent<unknown>, id: number) => {
@@ -111,6 +117,7 @@ const Inbox = () => {
         </div>
         <div className="pane-content">
           <MessageDetails
+            countSelect={countSelect}
             msg={itemSelectState}
             openCompose={openComposeDialog}
             openWarning={openWarningDialog}
