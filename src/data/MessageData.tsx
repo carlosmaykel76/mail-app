@@ -41,7 +41,7 @@ const MessageData: Array<IMessage> = [
     size: "5kb",
     read: false,
     isdelete: false,
-    body: "<h3>Ullamcorper morbi nec primis integer ante curabitur elit.</h3> Ligula fames arcu sollicitudin inceptos magna. Curae nostra eleifend integer mi nisl platea auctor vivamus venenatis. <br/>Nullam cursus risus a velit vitae. Tellus eleifend dictumst auctor habitasse vehicula conubia lacinia elementum. Sed gravida erat vivamus senectus leo. Convallis adipiscing etiam nisi donec diam varius euismod. Etiam malesuada curabitur diam.",
+    body: "<b>Ullamcorper morbi nec primis integer ante curabitur elit.</b> Ligula fames arcu sollicitudin inceptos magna. Curae nostra eleifend integer mi nisl platea auctor vivamus venenatis. <br/>Nullam cursus risus a velit vitae. Tellus eleifend dictumst auctor habitasse vehicula conubia lacinia elementum. Sed gravida erat vivamus senectus leo. Convallis adipiscing etiam nisi donec diam varius euismod. Etiam malesuada curabitur diam.",
   },
   {
     id: 4,
@@ -68,7 +68,7 @@ const MessageData: Array<IMessage> = [
     size: "15kb",
     read: true,
     isdelete: false,
-    body: "<h2>Porta dui laoreet. </h2>Aenean erat elementum eu magna aenean eget feugiat porttitor urna. Ad molestie nullam lectus dapibus etiam lobortis hac. Laoreet nisl imperdiet nec habitasse donec.<br/> In commodo eros rhoncus pellentesque nec ut mollis. Semper nullam proin viverra semper ultricies in dictum. Mauris porta velit fermentum rutrum volutpat. Nisi hac leo.",
+    body: "<b>Porta dui laoreet. </b>Aenean erat elementum eu magna aenean eget feugiat porttitor urna. Ad molestie nullam lectus dapibus etiam lobortis hac. Laoreet nisl imperdiet nec habitasse donec.<br/> In commodo eros rhoncus pellentesque nec ut mollis. Semper nullam proin viverra semper ultricies in dictum. Mauris porta velit fermentum rutrum volutpat. Nisi hac leo.",
   },
   {
     id: 6,

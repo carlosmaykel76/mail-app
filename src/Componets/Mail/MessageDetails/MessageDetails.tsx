@@ -9,12 +9,13 @@ import {
   Button,
 } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
-import EmailIcon from "@material-ui/icons/Email";
 import IMessage from "../../mail.interface";
 
 import ReplyIcon from "@material-ui/icons/Reply";
 import ReplyAllIcon from "@material-ui/icons/ReplyAll";
 import DeleteIcon from "@material-ui/icons/Delete";
+import FlagIcon from "@material-ui/icons/Flag";
+import EmailIcon from "@material-ui/icons/Email";
 import svgMsgDetails from "../../../imgs/MessageDetails.svg";
 import svgMsgSelected from "../../../imgs/messageSelected.svg";
 
@@ -106,7 +107,7 @@ const MessageDetails: React.FC<IMessageDetailsProps> = ({
                 </Button>
               </li>
               <li>
-                <Button startIcon={<DeleteIcon />} className={styles.bt}>
+                <Button startIcon={<FlagIcon />} className={styles.bt}>
                   Marcar
                 </Button>
               </li>
@@ -150,12 +151,12 @@ const MessageDetails: React.FC<IMessageDetailsProps> = ({
                   </Button>
                 </li>
                 <li>
-                  <Button startIcon={<DeleteIcon />} className={styles.bt}>
+                  <Button startIcon={<FlagIcon />} className={styles.bt}>
                     Marcar
                   </Button>
                 </li>
                 <li>
-                  <Button startIcon={<DeleteIcon />} className={styles.bt}>
+                  <Button startIcon={<EmailIcon />} className={styles.bt}>
                     Marcar como leído
                   </Button>
                 </li>

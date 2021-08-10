@@ -76,8 +76,14 @@ const Inbox = () => {
     } else {
       SetCountSelect(countSelect - 1);
     }
+  };
 
-    //alert("Esto id del msg " + countSelect);
+  const handleSelectAll = (
+    countSelectMsg: number,
+    listIdMsg: Array<number[]>
+  ) => {
+    SetCountSelect(countSelectMsg);
+    console.log(listIdMsg);
   };
 
   const handleSelect = (event: React.MouseEvent<unknown>, id: number) => {
@@ -113,6 +119,7 @@ const Inbox = () => {
             dataList={allMessages}
             onClick={handleClickSelectMsg}
             onSelect={handleSelect}
+            onSelectAll={handleSelectAll}
           />
         </div>
         <div className="pane-content">

@@ -47,7 +47,7 @@ const useStyles = makeStyles({
   },
 });
 
-const MessageItem = ({ msg, onSelect, onChecker }) => {
+const MessageItem = ({ msg, onSelect, onChecker, onSelectAll }) => {
   const styles = useStyles();
 
   const [showBar, setShowBar] = useState(false);
@@ -80,13 +80,13 @@ const MessageItem = ({ msg, onSelect, onChecker }) => {
     >
       <Grid container spacing={1}>
         <Grid item>
-          <div className={showBar || selectItem ? styles.hidden : styles.show}>
+          <div className={showBar || selectItem || onSelectAll ? styles.hidden : styles.show}>
             <AccountCircleIcon fontSize="large" />
           </div>
-          <div className={showBar || selectItem ? styles.show : styles.hidden}>
+          <div className={showBar || selectItem || onSelectAll ? styles.show : styles.hidden}>
             <Checkbox
               icon={<CheckBoxOutlineBlankIcon />}
-              checked={selectItem}
+              checked={selectItem || onSelectAll}
               checkedIcon={<CheckCircleIcon color="primary" />}
               color="default"
               name={"chkMsg-" + msg.id}
@@ -112,7 +112,7 @@ const MessageItem = ({ msg, onSelect, onChecker }) => {
                 
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                {msg.body.substr(0, 60) + " ..."}
+                <div dangerouslySetInnerHTML={{ __html: msg.body.substr(0, 60) + " ..." }} />                
               </Typography>
             </Grid>
             <Grid item></Grid>
