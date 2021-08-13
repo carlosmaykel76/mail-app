@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, Button } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import IMessage from "../../mail.interface";
 import MessageItem from "../Message/MessageItem";
@@ -8,6 +8,8 @@ import WarningDialog from "../../Modals/WarningDialog";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import Tooltip from "@material-ui/core/Tooltip";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
 interface IMessageListProps {
   dataList: Array<IMessage>;
@@ -39,6 +41,16 @@ const MessageList: React.FC<IMessageListProps> = ({
   const [warningTitle, setWarningTitle] = useState("Confirmación");
   const [selectAllMsg, SetSelectAllMsg] = useState(false);
   const [listIdMsg, setListIdMsg] = useState(initListIdMsg);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const anchorRef = React.useRef<HTMLButtonElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const openWarningDialog = (w: boolean, title: string, body: string) => {
     setViewDialog(w);
@@ -73,8 +85,37 @@ const MessageList: React.FC<IMessageListProps> = ({
               </Tooltip>
             </div>
           </Grid>
+          <Grid item xs={12} sm container>
+            <Grid item xs container direction="column" spacing={2}></Grid>
+            <Grid item>
+              <div>
+                <Button
+                  ref={anchorRef}
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  size="small"
+                  style={{ textTransform: "capitalize" }}
+                  onClick={handleClick}
+                >
+                  Filtrar
+                </Button>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                </Menu>
+              </div>
+            </Grid>
+          </Grid>
         </Grid>
       </Paper>
+
       {dataList.length > 0 ? (
         dataList.map((item: IMessage) => (
           <MessageItem
