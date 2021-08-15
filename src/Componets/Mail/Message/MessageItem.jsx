@@ -104,10 +104,10 @@ const MessageItem = ({ msg, onSelect, onChecker, onSelectAll }) => {
           >
             <Grid item xs>
               <Typography variant="subtitle1">
-                {msg.read === false ? msg.personfor : <b> {msg.personfor} </b>}                
+                {msg.read === true ? msg.personfor : <b> {msg.personfor} </b>}                
               </Typography>
               <Typography variant="body2" color="primary">
-                {msg.read === false ? msg.subject.substr(0, 40) + " ..." : <b> {msg.subject.substr(0, 40) + " ..."} </b>}       
+                {msg.read === true ? msg.subject.substr(0, 40) + " ..." : <b> {msg.subject.substr(0, 40) + " ..."} </b>}       
                 
               </Typography>
               <Typography variant="body2" color="textSecondary">

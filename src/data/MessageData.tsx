@@ -1,4 +1,4 @@
-import IMessage from "../Componets/mail.interface";
+import { IMessage } from "../Componets/mail.interface";
 
 const MessageData: Array<IMessage> = [
   {

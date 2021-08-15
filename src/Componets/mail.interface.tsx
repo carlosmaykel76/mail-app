@@ -1,4 +1,4 @@
-export default interface IMessage {
+export interface IMessage {
   id: number;
   importance: string;
   attached: boolean;
@@ -10,4 +10,9 @@ export default interface IMessage {
   read: boolean;
   isdelete: boolean;
   body: string;
+}
+
+export interface IFilter {
+  id: number;
+  value: string;
 }

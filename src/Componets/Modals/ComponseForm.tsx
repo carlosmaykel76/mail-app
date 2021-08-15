@@ -6,7 +6,7 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import KendoEditor from "../KendoEditor";
 import AttachModal from "./AttachModal";
-import IMessage from "../mail.interface";
+import { IMessage } from "../mail.interface";
 
 interface Props {
   openCompose: (n: boolean, t: string, f: boolean) => void;

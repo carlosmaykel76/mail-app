@@ -9,7 +9,7 @@ import {
   Button,
 } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
-import IMessage from "../../mail.interface";
+import { IMessage } from "../../mail.interface";
 
 import ReplyIcon from "@material-ui/icons/Reply";
 import ReplyAllIcon from "@material-ui/icons/ReplyAll";

@@ -7,7 +7,7 @@ import MessagesList from "../Componets/Mail/MessagesList/MessagesList";
 import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
 import SettingMail from "../Componets/Settings/SettingMail";
 import MessageData from "../data/MessageData";
-import IMessage from "./mail.interface";
+import { IMessage } from "./mail.interface";
 import WarningDialog from "./Modals/WarningDialog";
 import "../Styles/App.css";
 
@@ -93,7 +93,7 @@ const Inbox = () => {
 
     const newAllMessages = allMessages.map((m) => {
       if (m.id === id) {
-        m.read = false;
+        m.read = true;
         return m;
       }
       return m;
