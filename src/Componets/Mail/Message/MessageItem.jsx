@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   },
 });
 
-const MessageItem = ({ msg, onSelect, onChecker, onSelectAll }) => {
+const MessageItem = ({ msg, onClickRead, onSelectItem, onSelectAll }) => {
   const styles = useStyles();
 
   const [showBar, setShowBar] = useState(false);
@@ -60,14 +60,18 @@ const MessageItem = ({ msg, onSelect, onChecker, onSelectAll }) => {
     setShowBar(false);
   };
 
-  const handleChange = (event, id) => {   
+  const handleChangeSelectItem = (event, id) => {   
 
-    if (event.target.checked === true) {
-      onChecker(event, id);
+     if (event.target.checked) {         
+      
+      onSelectItem(event, id);
       setSelectItem(true);     
+      
     } else {
-      setSelectItem(false);
-      onChecker(event, 0);
+      
+      setSelectItem(false);     
+      onSelectItem(event, 0);
+
     }
   };
 
@@ -89,7 +93,7 @@ const MessageItem = ({ msg, onSelect, onChecker, onSelectAll }) => {
               checkedIcon={<CheckCircleIcon color="primary" />}
               color="default"
               name={"chkMsg-" + msg.id}
-              onChange={(event) => handleChange(event, msg.id)}
+              onChange={(event) => handleChangeSelectItem(event, msg.id)}              
             />
           </div>
         </Grid>
@@ -100,15 +104,14 @@ const MessageItem = ({ msg, onSelect, onChecker, onSelectAll }) => {
             container
             direction="column"
             spacing={2}
-            onClick={(event) => onSelect(event, msg.id)}
+            onClick={(event) => onClickRead(event, msg.id)}
           >
             <Grid item xs>
               <Typography variant="subtitle1">
                 {msg.read === true ? msg.personfor : <b> {msg.personfor} </b>}                
               </Typography>
               <Typography variant="body2" color="primary">
-                {msg.read === true ? msg.subject.substr(0, 40) + " ..." : <b> {msg.subject.substr(0, 40) + " ..."} </b>}       
-                
+                {msg.read === true ? msg.subject.substr(0, 40) + " ..." : <b> {msg.subject.substr(0, 40) + " ..."} </b>}                    
               </Typography>
               <Typography variant="body2" color="textSecondary">
                 <div dangerouslySetInnerHTML={{ __html: msg.body.substr(0, 60) + " ..." }} />                
@@ -126,6 +129,11 @@ const MessageItem = ({ msg, onSelect, onChecker, onSelectAll }) => {
               {msg.attached ? (
                 <AttachFileIcon fontSize="small" color="primary" />
               ) : (
+                ""
+              )}
+              {msg.marked ? ( 
+                <FlagIcon fontSize="small" color="primary" />
+              ):(
                 ""
               )}
             </div>

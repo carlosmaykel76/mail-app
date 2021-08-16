@@ -22,6 +22,7 @@ const Inbox = () => {
     sent: "",
     size: "",
     read: false,
+    marked: false,
     isdelete: false,
     body: "",
   };
@@ -38,6 +39,7 @@ const Inbox = () => {
   const [warningTitle, setWarningTitle] = useState("Confirmación");
   const [viewSetting, SetViewSetting] = useState(false);
   const [countSelect, SetCountSelect] = useState(0);
+  const [listId, setListId] = useState<number[]>([]);
 
   const openComposeDialog = (n: boolean, titulo: string, f: boolean) => {
     setViewCompose(n);
@@ -72,13 +74,15 @@ const Inbox = () => {
     id: number
   ) => {
     if (id !== 0) {
+      setListId([...listId, id]);
       SetCountSelect(countSelect + 1);
     } else {
       SetCountSelect(countSelect - 1);
     }
+    console.log(id);
   };
 
-  const handleSelectAll = (
+  const handleSelectAllMsg = (
     countSelectMsg: number,
     listIdMsg: Array<number[]>
   ) => {
@@ -86,7 +90,7 @@ const Inbox = () => {
     console.log(listIdMsg);
   };
 
-  const handleSelect = (event: React.MouseEvent<unknown>, id: number) => {
+  const handleClickRead = (event: React.MouseEvent<unknown>, id: number) => {
     const msg = MessageData.filter((item) => item.id === id);
 
     setItemSelectState(msg);
@@ -117,9 +121,9 @@ const Inbox = () => {
         <div className="pane-content">
           <MessagesList
             dataList={allMessages}
-            onClick={handleClickSelectMsg}
-            onSelect={handleSelect}
-            onSelectAll={handleSelectAll}
+            onSelectItem={handleClickSelectMsg}
+            onClickRead={handleClickRead}
+            onSelectAll={handleSelectAllMsg}
           />
         </div>
         <div className="pane-content">

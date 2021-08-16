@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Grid, Paper } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { IFilter, IMessage } from "../../mail.interface";
+import { IMessage } from "../../mail.interface";
 import MessageItem from "../Message/MessageItem";
 import WarningDialog from "../../Modals/WarningDialog";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
@@ -10,12 +10,11 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import FilterMessage from "../../FilterMessages";
-import { listFilter } from "../../parameters";
 
 interface IMessageListProps {
   dataList: Array<IMessage>;
-  onClick: (event: React.MouseEvent<unknown>, id: number) => void;
-  onSelect: (event: React.MouseEvent<unknown>, id: number) => void;
+  onSelectItem: (event: React.MouseEvent<unknown>, id: number) => void;
+  onClickRead: (event: React.MouseEvent<unknown>, id: number) => void;
   onSelectAll: (countSelect: number, listIdMsg: Array<number[]>) => void;
 }
 
@@ -34,8 +33,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const MessageList: React.FC<IMessageListProps> = ({
   dataList,
-  onClick,
-  onSelect,
+  onSelectItem,
+  onClickRead,
   onSelectAll,
 }) => {
   const styles = useStyles();
@@ -46,12 +45,16 @@ const MessageList: React.FC<IMessageListProps> = ({
   const [warningBody, setWarningBody] = useState("");
   const [warningTitle, setWarningTitle] = useState("Confirmación");
   const [selectAllMsg, SetSelectAllMsg] = useState(false);
+  // eslint-disable-next-line
   const [listIdMsg, setListIdMsg] = useState(initListIdMsg);
 
   const handleClickFilter = (id: number) => {
     switch (id) {
       case 2:
         setAllMessages(dataList.filter((item) => item.read === false));
+        break;
+      case 4:
+        setAllMessages(dataList.filter((item) => item.marked === true));
         break;
       case 6:
         setAllMessages(dataList.filter((item) => item.attached === true));
@@ -69,10 +72,10 @@ const MessageList: React.FC<IMessageListProps> = ({
     setWarningTitle(title === "" ? warningTitle : title);
   };
 
-  const handleChange = (event: any) => {
+  const handleChangeAllMsg = (event: any) => {
     if (event.target.checked === true) {
       SetSelectAllMsg(true);
-      onSelectAll(dataList.length, listIdMsg);
+      onSelectAll(allMessages.length, listIdMsg);
     } else {
       SetSelectAllMsg(false);
       onSelectAll(0, initListIdMsg);
@@ -91,7 +94,7 @@ const MessageList: React.FC<IMessageListProps> = ({
                   name="chkAllMsg"
                   icon={<CheckCircleOutlineIcon />}
                   checkedIcon={<CheckCircleIcon color="primary" />}
-                  onChange={(event) => handleChange(event)}
+                  onChange={(event) => handleChangeAllMsg(event)}
                 />
               </Tooltip>
             </div>
@@ -112,8 +115,8 @@ const MessageList: React.FC<IMessageListProps> = ({
         allMessages.map((item: IMessage) => (
           <MessageItem
             msg={item}
-            onSelect={onSelect}
-            onChecker={onClick}
+            onClickRead={onClickRead}
+            onSelectItem={onSelectItem}
             onSelectAll={selectAllMsg}
           />
         ))
