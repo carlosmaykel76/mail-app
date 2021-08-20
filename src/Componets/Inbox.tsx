@@ -73,13 +73,18 @@ const Inbox = () => {
     event: React.MouseEvent<unknown>,
     id: number
   ) => {
+    console.log("id del mensaje marcado " + id);
+
+    const idmsg = id;
+
+    setListId([...listId, idmsg]);
+
     if (id !== 0) {
-      setListId([...listId, id]);
       SetCountSelect(countSelect + 1);
     } else {
       SetCountSelect(countSelect - 1);
     }
-    console.log(id);
+    console.log(listId);
   };
 
   const handleSelectAllMsg = (
