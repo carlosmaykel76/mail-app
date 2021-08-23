@@ -17,3 +17,9 @@ export interface IFilter {
   id: number;
   value: string;
 }
+
+export interface IContacts {
+  inputValue?: string;
+  nombre: string;
+  email?: string;
+}

@@ -10,6 +10,8 @@ import MessageData from "../data/MessageData";
 import { IMessage } from "./mail.interface";
 import WarningDialog from "./Modals/WarningDialog";
 import "../Styles/App.css";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import AutoCompletado from "../AutoCompletado";
 
 const Inbox = () => {
   const initMessageState = {

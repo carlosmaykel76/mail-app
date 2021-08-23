@@ -172,7 +172,7 @@ const ServerConfig: React.FC<ServerConfigProps> = (
             >
               {cifrados.map((option) => (
                 <MenuItem
-                  style={{ zIndex: 1900 }}
+                  style={{ zIndex: 999999 }}
                   key={option.value}
                   value={option.value}
                 >

@@ -5,10 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import KendoEditor from "../KendoEditor";
+import Autocomplete, { createFilterOptions } from "@material-ui/lab/Autocomplete";
 import AttachModal from "./AttachModal";
 import { IMessage } from "../mail.interface";
+import ContactData from "../../data/ContactData";
 
-interface Props {
+interface ComponseFormProps {
   openCompose: (n: boolean, t: string, f: boolean) => void;
   titulo: string;
   flag: boolean;
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ComponseForm: React.FC<Props> = ({ openCompose, titulo, flag, msg }) => {
+const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, msg }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [visible, setVisible] = React.useState(true);
   const [viewAttach, SetViewAttach] = React.useState(false);
@@ -70,12 +72,19 @@ const ComponseForm: React.FC<Props> = ({ openCompose, titulo, flag, msg }) => {
               <Button className={styles.bt}>Para:</Button>
             </Grid>
             <Grid item xs={11}>
-              <TextField
+              <Autocomplete
+                disablePortal
+                multiple
+                limitTags={2}
                 id="to"
-                size="small"
-                className={styles.TextField}
-                value={flag ? msg[0]["email"] : ""}
+                options={ContactData}
+                getOptionLabel={(option) => option.nombre + " (" + option.email + ")"}
+                //defaultValue={flag ? contactData[13] : []}
+                renderInput={(params) => (
+                  <TextField {...params} size="small" />
+                )}
               />
+
             </Grid>
             <Grid item xs={1}>
               <label>Asunto:</label>
