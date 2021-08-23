@@ -7,7 +7,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import KendoEditor from "../KendoEditor";
 import Autocomplete, { createFilterOptions } from "@material-ui/lab/Autocomplete";
 import AttachModal from "./AttachModal";
-import { IMessage } from "../mail.interface";
+import { IMessage, IContacts } from "../mail.interface";
 import ContactData from "../../data/ContactData";
 
 interface ComponseFormProps {
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, msg }) => {
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [visible, setVisible] = React.useState(true);
   const [viewAttach, SetViewAttach] = React.useState(false);
@@ -79,7 +80,7 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
                 id="to"
                 options={ContactData}
                 getOptionLabel={(option) => option.nombre + " (" + option.email + ")"}
-                //defaultValue={flag ? contactData[13] : []}
+                //defaultValue={flag ? value : [initValue]}
                 renderInput={(params) => (
                   <TextField {...params} size="small" />
                 )}
