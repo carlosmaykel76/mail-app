@@ -12,6 +12,7 @@ const contactData: IContacts[] = [
     { nombre: 'Bertha Oliva', email: "bertha@telematel.com" },
     { nombre: 'Carlos Alberto', email: "calc@cosoft.cu" },
     { nombre: 'Alexander Lopez', email: "alex@cosoft.cu" },
+    { nombre: 'Carlos', email: "alex@cosoft.cu" },
 ]
 
 export default contactData;

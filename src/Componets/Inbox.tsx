@@ -7,11 +7,9 @@ import MessagesList from "../Componets/Mail/MessagesList/MessagesList";
 import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
 import SettingMail from "../Componets/Settings/SettingMail";
 import MessageData from "../data/MessageData";
-import { IMessage } from "./mail.interface";
+import { IMessage, IContacts } from "./mail.interface";
 import WarningDialog from "./Modals/WarningDialog";
 import "../Styles/App.css";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import AutoCompletado from "./AutoCompletado";
 
 const Inbox = () => {
   const initMessageState = {
@@ -42,6 +40,7 @@ const Inbox = () => {
   const [viewSetting, SetViewSetting] = useState(false);
   const [countSelect, SetCountSelect] = useState(0);
   const [listId, setListId] = useState<number[]>([]);
+  const [contact, setContact] = useState<IContacts[]>([]);
 
   const openComposeDialog = (n: boolean, titulo: string, f: boolean) => {
     setViewCompose(n);
@@ -102,6 +101,11 @@ const Inbox = () => {
 
     setItemSelectState(msg);
 
+    const contactResponse = [{ nombre: msg[0]["personfor"], email: msg[0]["email"] }]
+    setContact(contactResponse)
+
+    console.log(contact)
+
     const newAllMessages = allMessages.map((m) => {
       if (m.id === id) {
         m.read = true;
@@ -150,6 +154,7 @@ const Inbox = () => {
             titulo={tituloModal}
             flag={response}
             msg={itemSelectState}
+            contact={contact}
           />
         )}
       </div>

@@ -5,16 +5,18 @@ import Grid from "@material-ui/core/Grid";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import KendoEditor from "../KendoEditor";
-import Autocomplete, { createFilterOptions } from "@material-ui/lab/Autocomplete";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import AttachModal from "./AttachModal";
-import { IMessage, IContacts } from "../mail.interface";
-import ContactData from "../../data/ContactData";
+import { IContacts, IMessage } from "../mail.interface";
+import contactData from "../../data/ContactData";
+import ContactModal from './ContactModal';
 
 interface ComponseFormProps {
   openCompose: (n: boolean, t: string, f: boolean) => void;
   titulo: string;
   flag: boolean;
   msg: Array<IMessage>;
+  contact: Array<IContacts>;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,19 +43,28 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, msg }) => {
+const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, msg, contact }) => {
+
+  console.log(contact);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [visible, setVisible] = React.useState(true);
-  const [viewAttach, SetViewAttach] = React.useState(false);
+  const [viewAttach, setViewAttach] = React.useState(false);
+  const [viewContacts, setViewContacts] = React.useState(false);
   const styles = useStyles();
+
+  const contactResponse = [{ nombre: '', email: "" }];
 
   const closeComposeDialog = () => {
     openCompose(!visible, "", false);
   };
 
   const openAttachDialog = () => {
-    SetViewAttach(!viewAttach);
+    setViewAttach(!viewAttach);
+  };
+
+  const openContactModel = () => {
+    setViewContacts(!viewContacts);
   };
 
   return (
@@ -70,7 +81,9 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
         <div className={styles.modal}>
           <Grid container spacing={1}>
             <Grid item xs={1}>
-              <Button className={styles.bt}>Para:</Button>
+              <Button className={styles.bt}
+                onClick={openContactModel}
+              >Para:</Button>
             </Grid>
             <Grid item xs={11}>
               <Autocomplete
@@ -78,9 +91,9 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
                 multiple
                 limitTags={2}
                 id="to"
-                options={ContactData}
+                options={contactData}
                 getOptionLabel={(option) => option.nombre + " (" + option.email + ")"}
-                //defaultValue={flag ? value : [initValue]}
+                defaultValue={flag ? [contact[0]] : []}
                 renderInput={(params) => (
                   <TextField {...params} size="small" />
                 )}
@@ -138,6 +151,8 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
         </WindowActionsBar>
       </Window>
       <div>{viewAttach && <AttachModal openAttach={openAttachDialog} />}</div>
+      <div>{viewContacts && <ContactModal openContacts={openContactModel} />}</div>
+
     </>
   );
 };
