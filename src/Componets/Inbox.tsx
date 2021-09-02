@@ -11,6 +11,12 @@ import { IMessage, IContacts } from "./mail.interface";
 import WarningDialog from "./Modals/WarningDialog";
 import "../Styles/App.css";
 
+import AppBar from '@material-ui/core/AppBar';
+import Tab from '@material-ui/core/Tab';
+import TabContext from '@material-ui/lab/TabContext';
+import TabList from '@material-ui/lab/TabList';
+import TabPanel from '@material-ui/lab/TabPanel';
+
 const Inbox = () => {
   const initMessageState = {
     id: 0,
@@ -146,7 +152,6 @@ const Inbox = () => {
           />
         </div>
       </Splitter>
-
       <div>
         {viewCompose && (
           <ComponseForm

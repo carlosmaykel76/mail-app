@@ -4,7 +4,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MarkAsUnreadIcon from "@material-ui/icons/MarkunreadMailbox";
 //import MarkAsUnreadIcon from '@material-ui/icons/MarkAsUnread';
 import SettingsIcon from "@material-ui/icons/Settings";
-import { ButtonGroup, IconButton } from "@material-ui/core";
+import { Button, ButtonGroup, IconButton, Box } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -17,20 +17,28 @@ interface ToolbarProps {
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     width: "100%",
-    height: "30px",
+    height: "32px",
     background: "LightGray",
     border: "1px solid #000",
     padding: "2px 0px 0px 0px",
     //padding: 'top right bottom left'
   },
+  toolbarDer: {
+    display: "flex",
+    //border: "1px solid black",
+
+    justifyContent: "space-around",
+    alignItems: "center"
+    //alignItems: "center"
+  },
   textfield: {
     width: "100%",
   },
-  bt: {
+  button: {
     textTransform: "capitalize",
   },
   group: {
-    height: "30px",
+    height: "25px",
   },
 }));
 
@@ -51,42 +59,26 @@ const Toolbar: React.FC<ToolbarProps> = ({
 
   return (
     <div className={styles.toolbar}>
-      <ButtonGroup
-        variant="text"
+      <Button
+        onClick={openModal}
+        variant="contained"
         color="primary"
-        className={styles.group}
-        aria-label="text primary button group"
+        className={styles.button}
+        disableElevation
+        size="small"
       >
-        <Tooltip title="Nuevo Mensaje">
-          <IconButton aria-label="newmensaje" onClick={openModal}>
-            <EmailIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Nuevo Mensaje">
-          <IconButton aria-label="delete" disabled>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Configura Cuenta">
-          <IconButton
-            aria-label="setting"
-            onClick={() => {
-              openWarning(
-                true,
-                "",
-                "Esta seguro de Marcar todos los Mensajes como Leidos"
-              );
-            }}
-          >
-            <MarkAsUnreadIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Configura Cuenta">
-          <IconButton aria-label="setting" onClick={showSetting}>
-            <SettingsIcon />
-          </IconButton>
-        </Tooltip>
-      </ButtonGroup>
+        Mensaje nuevo
+      </Button>{" "}
+      <Button
+        onClick={showSetting}
+        variant="contained"
+        color="default"
+        className={styles.button}
+        disableElevation
+        size="small"
+      >
+        Configuración
+      </Button>
     </div>
   );
 };

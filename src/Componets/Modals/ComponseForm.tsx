@@ -51,6 +51,7 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
   const [visible, setVisible] = React.useState(true);
   const [viewAttach, setViewAttach] = React.useState(false);
   const [viewContacts, setViewContacts] = React.useState(false);
+  const [showCC, setShowCC] = React.useState(true);
   const styles = useStyles();
 
   const contactResponse = [{ nombre: '', email: "" }];
@@ -72,7 +73,7 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
       <Window
         title={titulo}
         onClose={closeComposeDialog}
-        initialHeight={500}
+        initialHeight={600}
         initialWidth={800}
         modal
         resizable
@@ -98,8 +99,25 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
                   <TextField {...params} size="small" />
                 )}
               />
-
             </Grid>
+            {showCC ? (
+              <Grid container spacing={1}>
+                <Grid item xs={1}><label>CC:</label></Grid>
+                <Grid item xs={11}>
+                  <Autocomplete
+                    disablePortal
+                    multiple
+                    limitTags={2}
+                    id="cc"
+                    options={contactData}
+                    getOptionLabel={(option) => option.nombre + " (" + option.email + ")"}
+                    defaultValue={flag ? [contact[0]] : []}
+                    renderInput={(params) => (
+                      <TextField {...params} size="small" />
+                    )}
+                  />
+                </Grid>
+              </Grid>) : ("")}
             <Grid item xs={1}>
               <label>Asunto:</label>
             </Grid>

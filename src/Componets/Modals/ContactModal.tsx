@@ -64,6 +64,22 @@ const ContactModal: React.FC<contactModalProps> = ({ openContacts }) => {
         openContacts(false);
     };
 
+    // filter(event){
+    //     var text = event.target.value
+    //     const data = this.state.productoBackup
+    //     const newData = data.filter(function(item){
+    //         const itemDataTitle = item.titulo.toUpperCase()
+    //         const itemDataDescp = item.descripcion.toUpperCase()
+    //         const campo = itemDataTitle+" "+itemDataDescp
+    //         const textData = text.toUpperCase()
+    //         return campo.indexOf(textData) > -1
+    //     })
+    //     this.setState({
+    //         producto: newData,
+    //         text: text,
+    //     })
+    // } 
+
     const handleChange = (filter: string) => {
 
         const resultado = contactData.find(item => item.nombre === filter);
@@ -77,11 +93,14 @@ const ContactModal: React.FC<contactModalProps> = ({ openContacts }) => {
             title={"Lista de Contactos"}
             onClose={closeModal}
             initialHeight={300}
-            initialWidth={600}
+            initialWidth={650}
+            modal
+            resizable
+            draggable
         >
             <div className={styles.modal}>
                 <Grid container spacing={1}>
-                    <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-end" }}>
+                    <Grid item xs={12} style={{ display: "flex", justifyContent: "flex-start" }}>
                         <TextField
                             id="outlined-basic"
                             label="Buscar por nombre"

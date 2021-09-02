@@ -54,8 +54,8 @@ const KendoEditor = () => {
         [Undo, Redo],
         [Link, Unlink, InsertImage, ViewHtml],
       ]}
-      contentStyle={{ height: 200 }}
-      //defaultContent={content}
+      contentStyle={{ height: 250 }}
+    //defaultContent={content}
     />
   );
 };
