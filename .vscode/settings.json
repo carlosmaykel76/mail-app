@@ -2,5 +2,6 @@
     "prettier.endOfLine": "auto",
     "prettier.jsxBracketSameLine": true,
     "prettier.insertPragma": true,
-    "prettier.jsxSingleQuote": true
+    "prettier.jsxSingleQuote": true,
+    "prettier.singleQuote": true
 }

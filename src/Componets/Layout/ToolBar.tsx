@@ -1,17 +1,10 @@
 import React from "react";
-import EmailIcon from "@material-ui/icons/Email";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MarkAsUnreadIcon from "@material-ui/icons/MarkunreadMailbox";
-//import MarkAsUnreadIcon from '@material-ui/icons/MarkAsUnread';
-import SettingsIcon from "@material-ui/icons/Settings";
-import { Button, ButtonGroup, IconButton, Box } from "@material-ui/core";
-import Tooltip from "@material-ui/core/Tooltip";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 interface ToolbarProps {
   openCompose: (n: boolean, t: string, f: boolean) => void;
   openSetting: (n: boolean) => void;
-  openWarning: (w: boolean, title: string, body: string) => void;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 const Toolbar: React.FC<ToolbarProps> = ({
   openCompose,
   openSetting,
-  openWarning,
 }) => {
   const styles = useStyles();
 

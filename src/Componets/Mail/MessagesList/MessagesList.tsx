@@ -40,8 +40,6 @@ const MessageList: React.FC<IMessageListProps> = ({
   const styles = useStyles();
   const initListIdMsg: Array<number[]> = [];
   const [allMessages, setAllMessages] = useState<IMessage[]>(dataList);
-
-  const [viewDialog, setViewDialog] = useState(false);
   const [warningBody, setWarningBody] = useState("");
   const [warningTitle, setWarningTitle] = useState("Confirmación");
   const [selectAllMsg, SetSelectAllMsg] = useState(false);
@@ -64,12 +62,6 @@ const MessageList: React.FC<IMessageListProps> = ({
         setAllMessages(dataList);
         break;
     }
-  };
-
-  const openWarningDialog = (w: boolean, title: string, body: string) => {
-    setViewDialog(w);
-    setWarningBody(body);
-    setWarningTitle(title === "" ? warningTitle : title);
   };
 
   const handleChangeAllMsg = (event: any) => {
@@ -123,15 +115,6 @@ const MessageList: React.FC<IMessageListProps> = ({
       ) : (
         <div>No Existen mensajes</div>
       )}
-      <div>
-        {viewDialog && (
-          <WarningDialog
-            titleDialog={warningTitle}
-            BodyDialog={warningBody}
-            closeWarning={openWarningDialog}
-          />
-        )}
-      </div>
     </>
   );
 };

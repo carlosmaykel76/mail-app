@@ -51,6 +51,7 @@ const MessageItem = ({ msg, onClickRead, onSelectItem, onSelectAll }) => {
 
   const [showBar, setShowBar] = useState(false);
   const [selectItem, setSelectItem] = useState(false);
+  const [viewDialog, setViewDialog] = useState(false);
 
   const handleOverMouse = () => {
     setShowBar(true);
@@ -73,6 +74,11 @@ const MessageItem = ({ msg, onClickRead, onSelectItem, onSelectAll }) => {
       onSelectItem(event, 0);
 
     }
+  };
+
+  const handleOnClick = (id) => {
+    setViewDialog(true);
+    //onDelete(id);
   };
 
   return (
@@ -141,7 +147,7 @@ const MessageItem = ({ msg, onClickRead, onSelectItem, onSelectAll }) => {
               <ButtonGroup size="small">
                 <Tooltip title="Eliminar">
                   <IconButton>
-                    <DeleteIcon fontSize="small" />
+                    <DeleteIcon fontSize="small" onClick={ () => (handleOnClick(msg.id))} />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Marcar como no leído">
@@ -164,6 +170,21 @@ const MessageItem = ({ msg, onClickRead, onSelectItem, onSelectAll }) => {
           </Grid>
         </Grid>
       </Grid>
+    
+{/*      <div>
+        <IconButton aria-label="delete" onClick={() => setConfirmOpen(true)}>
+          <DeleteIcon />
+        </IconButton>
+        <ConfirmDialog
+          title="Delete Post?"
+          open={confirmOpen}
+          setOpen={setConfirmOpen}
+          onConfirm={deletePost}
+        >
+          Are you sure you want to delete this post?
+        </ConfirmDialog>
+      </div> */}
+
     </Paper>
   );
 };

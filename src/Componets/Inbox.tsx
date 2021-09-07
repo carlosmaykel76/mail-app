@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { Splitter } from "@progress/kendo-react-layout";
 import ToolBar from "./Layout/ToolBar";
 import ComponseForm from "./Modals/ComponseForm";
-import Collapse from "./Collapse/Collapse";
+import Collapse from "./Collapse/AllCollapse";
 import MessagesList from "../Componets/Mail/MessagesList/MessagesList";
 import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
 import SettingMail from "../Componets/Settings/SettingMail";
@@ -10,12 +10,6 @@ import MessageData from "../data/MessageData";
 import { IMessage, IContacts } from "./mail.interface";
 import WarningDialog from "./Modals/WarningDialog";
 import "../Styles/App.css";
-
-import AppBar from '@material-ui/core/AppBar';
-import Tab from '@material-ui/core/Tab';
-import TabContext from '@material-ui/lab/TabContext';
-import TabList from '@material-ui/lab/TabList';
-import TabPanel from '@material-ui/lab/TabPanel';
 
 const Inbox = () => {
   const initMessageState = {
@@ -38,6 +32,7 @@ const Inbox = () => {
   const [itemSelectState, setItemSelectState] = useState<IMessage[]>([
     initMessageState,
   ]);
+  const [deleteMessages, setDeleteMessages] = useState<IMessage[]>([]);
   const [tituloModal, setTituloModal] = useState("Nuevo Mensaje");
   const [response, setResponse] = useState(false);
   const [viewDialog, setViewDialog] = useState(false);
@@ -47,6 +42,24 @@ const Inbox = () => {
   const [countSelect, SetCountSelect] = useState(0);
   const [listId, setListId] = useState<number[]>([]);
   const [contact, setContact] = useState<IContacts[]>([]);
+  const [countMessage, setCountMessage] = useState(0)
+  const [countRead, setCountRead] = useState(0)
+
+  const [dialogTitle, setDialogTitle] = useState("Confirmacion");
+  const [refenrence, setRefenrence] = useState("");
+  const [dialogQuestion, setDialogQuestion] = useState("");
+  const [dialogResult, setDialogResult] = useState(0);
+
+  useEffect(() => {
+    setCountMessage(allMessages.length);
+    var countRead: number = 0;
+    allMessages.map((m) => {
+      if (m.read === false) {
+        countRead = countRead + 1;
+      }
+    }, [allMessages]);
+    setCountRead(countRead);
+  }, [allMessages]);
 
   const openComposeDialog = (n: boolean, titulo: string, f: boolean) => {
     setViewCompose(n);
@@ -54,20 +67,56 @@ const Inbox = () => {
     setTituloModal(titulo);
   };
 
-  const openWarningDialog = (w: boolean, title: string, body: string) => {
+  const openDialogForm = (w: boolean, title: string, question: string) => {
     setViewDialog(w);
-    setWarningBody(body);
-    setWarningTitle(title === "" ? warningTitle : title);
+    setDialogTitle(title === "" ? dialogTitle : title);
+    setDialogQuestion(question)
   };
+
+  const closeDialogForm = (cReference: string) => {
+    switch (cReference) {
+      case "WarningDialog":
+        setViewDialog(false);
+        break;
+      case "SettingMail":
+        SetViewSetting(false);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const confirmDialog = (nResutl: number, cReference: string) => {
+    setDialogResult(nResutl);
+  };
+
+  const deleteMessage = (idx: number) => {
+
+    alert(dialogResult + " " + idx);
+
+    let deleted: IMessage[] = [...deleteMessages];
+
+    if (dialogResult === 1) {
+      const del: IMessage[] = allMessages.map((m) => {
+        if (m.id === idx) {
+          m.isdelete = true;
+          return m;
+        }
+        return m;
+      });
+    }
+
+    console.log(deleted)
+    // setListId([...listId, idmsg]);
+    setDeleteMessages(deleted)
+  }
 
   const openSettingModel = (s: boolean) => {
     SetViewSetting(s);
   };
 
-  //const CountMsg = MessageData.length;
-
   const [panes, setPanes] = useState([
-    { size: "15%", min: "150px", collapsible: false },
+    { size: "17%", min: "150px", collapsible: false },
     {},
     { size: "40%", min: "20px", collapsible: true },
   ]);
@@ -110,8 +159,6 @@ const Inbox = () => {
     const contactResponse = [{ nombre: msg[0]["personfor"], email: msg[0]["email"] }]
     setContact(contactResponse)
 
-    console.log(contact)
-
     const newAllMessages = allMessages.map((m) => {
       if (m.id === id) {
         m.read = true;
@@ -128,12 +175,11 @@ const Inbox = () => {
       <ToolBar
         openCompose={openComposeDialog}
         openSetting={openSettingModel}
-        openWarning={openWarningDialog}
       />
 
       <Splitter style={{ height: 500 }} panes={panes} onChange={onChange}>
         <div className="pane-content">
-          <Collapse />
+          <Collapse countMessage={countMessage} countRead={countRead} />
         </div>
         <div className="pane-content">
           <MessagesList
@@ -144,12 +190,14 @@ const Inbox = () => {
           />
         </div>
         <div className="pane-content">
-          <MessageDetails
-            countSelect={countSelect}
-            msg={itemSelectState}
-            openCompose={openComposeDialog}
-            openWarning={openWarningDialog}
-          />
+          <>
+            <MessageDetails
+              countSelect={countSelect}
+              msg={itemSelectState}
+              openCompose={openComposeDialog}
+              openDialog={openDialogForm}
+            />
+          </>
         </div>
       </Splitter>
       <div>
@@ -166,14 +214,17 @@ const Inbox = () => {
       <div>
         {viewDialog && (
           <WarningDialog
-            titleDialog={warningTitle}
-            BodyDialog={warningBody}
-            closeWarning={openWarningDialog}
+            bStatus={true}
+            cTitle={dialogTitle}
+            cReference={refenrence}
+            cQuestion={dialogQuestion}
+            confirmDialog={confirmDialog}
+            closeWarning={closeDialogForm}
           />
         )}
       </div>
       <div>
-        {viewSetting && <SettingMail closeSetting={openSettingModel} />}
+        {viewSetting && <SettingMail closeSetting={closeDialogForm} />}
       </div>
     </>
   );

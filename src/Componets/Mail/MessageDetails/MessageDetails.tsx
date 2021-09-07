@@ -23,7 +23,7 @@ interface IMessageDetailsProps {
   countSelect: number;
   msg: Array<IMessage>;
   openCompose: (n: boolean, t: string, f: boolean) => void;
-  openWarning: (w: boolean, title: string, body: string) => void;
+  openDialog: (w: boolean, title: string, question: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,18 +74,12 @@ const MessageDetails: React.FC<IMessageDetailsProps> = ({
   countSelect,
   msg,
   openCompose,
-  openWarning,
+  openDialog,
 }) => {
   const styles = useStyles();
 
   const openModal = () => {
     openCompose(true, "Respuesta al Mensaje", true);
-  };
-
-  const warningModal = () => {
-    const body = "Desea eliminar el Mensaje Seleccionado";
-    const title = "Confirmación";
-    openWarning(true, title, body);
   };
 
   return msg[0]["id"] === 0 ? (
@@ -200,7 +194,7 @@ const MessageDetails: React.FC<IMessageDetailsProps> = ({
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete">
-                  <IconButton aria-label="delete" onClick={warningModal}>
+                  <IconButton aria-label="delete" >
                     <DeleteIcon />
                   </IconButton>
                 </Tooltip>

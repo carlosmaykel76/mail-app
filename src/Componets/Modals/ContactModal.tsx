@@ -1,9 +1,8 @@
 import React from 'react'
 import { Window, WindowActionsBar } from "@progress/kendo-react-dialogs";
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
 import contactData from "../../data/ContactData"
 
 import Table from '@material-ui/core/Table';
@@ -13,7 +12,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { IContacts } from '../mail.interface';
 
 interface contactModalProps {
     openContacts: (n: boolean) => void;
@@ -58,6 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ContactModal: React.FC<contactModalProps> = ({ openContacts }) => {
     const styles = useStyles();
 
+    // eslint-disable-next-line
     const [listContacts, setListContacts] = React.useState(contactData)
 
     const closeModal = () => {

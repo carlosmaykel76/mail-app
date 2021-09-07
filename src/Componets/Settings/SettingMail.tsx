@@ -12,7 +12,7 @@ import ServerConfig from "./ServerConfig";
 import * as Data from "../../data/AccountMailData";
 
 interface SettingMailProps {
-  closeSetting: (n: boolean) => void;
+  closeSetting: (cReference: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -66,7 +66,7 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
   const [warningTitle, setWarningTitle] = useState("Confirmación");
 
   const closeSettingModel = () => {
-    closeSetting(false);
+    closeSetting("SettingMail");
   };
 
   const openWarningDialog = (flag: boolean, title: string, body: string) => {
@@ -197,15 +197,6 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
             configSelect={itemSelectState}
           />
         </Grid>
-      </div>
-      <div>
-        {viewDialog && (
-          <WarningDialog
-            titleDialog={warningTitle}
-            BodyDialog={warningBody}
-            closeWarning={openWarningDialog}
-          />
-        )}
       </div>
     </Window>
   );

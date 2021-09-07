@@ -56,7 +56,13 @@ const AccordionDetails = withStyles((theme) => ({
   },
 }))(MuiAccordionDetails);
 
-export default function CustomizedAccordions() {
+interface AllCollapseProps {
+  countMessage: number;
+  countRead: number;
+}
+
+const AllCollapse: React.FC<AllCollapseProps> = ({ countMessage, countRead }) => {
+
   const [expanded, setExpanded] = React.useState<string | false>("panel1");
 
   const handleChange =
@@ -102,7 +108,7 @@ export default function CustomizedAccordions() {
           <Typography>Cuenta de Correo</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <MailAccount />
+          <MailAccount countMsg={countMessage} countRead={countRead} />
         </AccordionDetails>
       </Accordion>
       <Accordion
@@ -121,3 +127,5 @@ export default function CustomizedAccordions() {
     </div>
   );
 }
+
+export default AllCollapse

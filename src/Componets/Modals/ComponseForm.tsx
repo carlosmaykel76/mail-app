@@ -44,17 +44,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, msg, contact }) => {
-
-  console.log(contact);
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [visible, setVisible] = React.useState(true);
   const [viewAttach, setViewAttach] = React.useState(false);
   const [viewContacts, setViewContacts] = React.useState(false);
-  const [showCC, setShowCC] = React.useState(true);
+  const [showCCo, setShowCCo] = React.useState(false);
   const styles = useStyles();
-
-  const contactResponse = [{ nombre: '', email: "" }];
+  // eslint-disable-next-line
+  //const contactResponse = [{ nombre: '', email: "" }];
 
   const closeComposeDialog = () => {
     openCompose(!visible, "", false);
@@ -66,6 +63,10 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
 
   const openContactModel = () => {
     setViewContacts(!viewContacts);
+  };
+
+  const showTextCCo = () => {
+    setShowCCo(true);
   };
 
   return (
@@ -86,7 +87,7 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
                 onClick={openContactModel}
               >Para:</Button>
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={10}>
               <Autocomplete
                 disablePortal
                 multiple
@@ -100,18 +101,44 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
                 )}
               />
             </Grid>
-            {showCC ? (
+            <Grid item xs={1}>
+              <Button className={styles.bt}
+                onClick={showTextCCo}
+              >CCo</Button>
+            </Grid>
+            <Grid container spacing={1}>
+              <Grid item xs={1}>
+                <Button className={styles.bt}
+                  onClick={openContactModel}
+                >CC:</Button></Grid>
+              <Grid item xs={11}>
+                <Autocomplete
+                  disablePortal
+                  multiple
+                  limitTags={2}
+                  id="cc"
+                  options={contactData}
+                  getOptionLabel={(option) => option.nombre + " (" + option.email + ")"}
+                  renderInput={(params) => (
+                    <TextField {...params} size="small" />
+                  )}
+                />
+              </Grid>
+            </Grid>
+            {showCCo ? (
               <Grid container spacing={1}>
-                <Grid item xs={1}><label>CC:</label></Grid>
+                <Grid item xs={1}>
+                  <Button className={styles.bt}
+                    onClick={openContactModel}
+                  >CCo:</Button></Grid>
                 <Grid item xs={11}>
                   <Autocomplete
                     disablePortal
                     multiple
                     limitTags={2}
-                    id="cc"
+                    id="cco"
                     options={contactData}
                     getOptionLabel={(option) => option.nombre + " (" + option.email + ")"}
-                    defaultValue={flag ? [contact[0]] : []}
                     renderInput={(params) => (
                       <TextField {...params} size="small" />
                     )}
