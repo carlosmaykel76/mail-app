@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Splitter } from "@progress/kendo-react-layout";
+
 import ToolBar from "./Layout/ToolBar";
 import ComponseForm from "./Modals/ComponseForm";
 import Collapse from "./Collapse/AllCollapse";
@@ -8,7 +9,6 @@ import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
 import SettingMail from "../Componets/Settings/SettingMail";
 import MessageData from "../data/MessageData";
 import { IMessage, IContacts } from "./mail.interface";
-import WarningDialog from "./Modals/WarningDialog";
 import "../Styles/App.css";
 
 const Inbox = () => {
@@ -26,94 +26,22 @@ const Inbox = () => {
     isdelete: false,
     body: "",
   };
-
-  const [allMessages, setAllMessages] = useState<IMessage[]>(MessageData);
-  const [viewCompose, setViewCompose] = useState(false);
+  // eslint-disable-next-line
+  const [mailBox, setMailBox] = useState<IMessage[]>(MessageData);
+  const [inbox, setInbox] = useState<IMessage[]>(MessageData.filter((m) => m.isdelete === false));
+  const [countMsgInbox, setCountMsgInbox] = useState(0);
+  const [countMsgRead, setCountMsgRead] = useState(0);
+  const [countMsgDelete, setCountMsgDelete] = useState(mailBox.filter((m) => m.isdelete === true).length);
+  const [vSetting, setVSetting] = useState(false);
+  const [vCompose, setVCompose] = useState(false);
+  const [tituloModal, setTituloModal] = useState("Nuevo Mensaje");
+  const [responseMail, setResponseMail] = useState(false);
+  const [countSelect, setCountSelect] = useState(0);
+  const [listIdSelect, setListIdSelect] = useState<number[]>([]);
   const [itemSelectState, setItemSelectState] = useState<IMessage[]>([
     initMessageState,
   ]);
-  const [deleteMessages, setDeleteMessages] = useState<IMessage[]>([]);
-  const [tituloModal, setTituloModal] = useState("Nuevo Mensaje");
-  const [response, setResponse] = useState(false);
-  const [viewDialog, setViewDialog] = useState(false);
-  const [warningBody, setWarningBody] = useState("");
-  const [warningTitle, setWarningTitle] = useState("Confirmación");
-  const [viewSetting, SetViewSetting] = useState(false);
-  const [countSelect, SetCountSelect] = useState(0);
-  const [listId, setListId] = useState<number[]>([]);
   const [contact, setContact] = useState<IContacts[]>([]);
-  const [countMessage, setCountMessage] = useState(0)
-  const [countRead, setCountRead] = useState(0)
-
-  const [dialogTitle, setDialogTitle] = useState("Confirmacion");
-  const [refenrence, setRefenrence] = useState("");
-  const [dialogQuestion, setDialogQuestion] = useState("");
-  const [dialogResult, setDialogResult] = useState(0);
-
-  useEffect(() => {
-    setCountMessage(allMessages.length);
-    var countRead: number = 0;
-    allMessages.map((m) => {
-      if (m.read === false) {
-        countRead = countRead + 1;
-      }
-    }, [allMessages]);
-    setCountRead(countRead);
-  }, [allMessages]);
-
-  const openComposeDialog = (n: boolean, titulo: string, f: boolean) => {
-    setViewCompose(n);
-    setResponse(f);
-    setTituloModal(titulo);
-  };
-
-  const openDialogForm = (w: boolean, title: string, question: string) => {
-    setViewDialog(w);
-    setDialogTitle(title === "" ? dialogTitle : title);
-    setDialogQuestion(question)
-  };
-
-  const closeDialogForm = (cReference: string) => {
-    switch (cReference) {
-      case "WarningDialog":
-        setViewDialog(false);
-        break;
-      case "SettingMail":
-        SetViewSetting(false);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const confirmDialog = (nResutl: number, cReference: string) => {
-    setDialogResult(nResutl);
-  };
-
-  const deleteMessage = (idx: number) => {
-
-    alert(dialogResult + " " + idx);
-
-    let deleted: IMessage[] = [...deleteMessages];
-
-    if (dialogResult === 1) {
-      const del: IMessage[] = allMessages.map((m) => {
-        if (m.id === idx) {
-          m.isdelete = true;
-          return m;
-        }
-        return m;
-      });
-    }
-
-    console.log(deleted)
-    // setListId([...listId, idmsg]);
-    setDeleteMessages(deleted)
-  }
-
-  const openSettingModel = (s: boolean) => {
-    SetViewSetting(s);
-  };
 
   const [panes, setPanes] = useState([
     { size: "17%", min: "150px", collapsible: false },
@@ -125,32 +53,59 @@ const Inbox = () => {
     setPanes(event.newState);
   };
 
-  const handleClickSelectMsg = (
-    event: React.MouseEvent<unknown>,
-    id: number
-  ) => {
-    console.log("id del mensaje marcado " + id);
+  useEffect(() => {
 
-    const idmsg = id;
+    setCountMsgInbox(inbox.filter((m) => m.isdelete === false).length);
+    setCountMsgRead(inbox.filter((m) => m.read === false && m.isdelete === false).length);
 
-    setListId([...listId, idmsg]);
+  }, [inbox]);
 
-    if (id !== 0) {
-      SetCountSelect(countSelect + 1);
-    } else {
-      SetCountSelect(countSelect - 1);
+  /**
+   * Funcion que realiza el filtrado de la lista Inbox
+   * @param id del filtro que se selecciono
+   */
+  const filterMessagesInbox = (id: number) => {
+    switch (id) {
+      case 2:
+        setInbox(mailBox.filter((m) => m.read === false && m.isdelete === false));
+        break;
+      case 4:
+        setInbox(mailBox.filter((m) => m.marked === true && m.isdelete === false));
+        break;
+      case 6:
+        setInbox(mailBox.filter((m) => m.attached === true && m.isdelete === false));
+        break
+      default:
+        setInbox(mailBox);
+        break;
     }
-    console.log(listId);
-  };
+  }
 
-  const handleSelectAllMsg = (
-    countSelectMsg: number,
-    listIdMsg: Array<number[]>
-  ) => {
-    SetCountSelect(countSelectMsg);
-    console.log(listIdMsg);
-  };
+  /**
+   * Elimina el Mensaje que corresponde con el Id
+   * @param id del mensaje que se desea eliminar
+   */
+  const deleteMenssage = (id: number) => {
 
+    const newInbox = inbox.map((m) => {
+      if (m.id === id) {
+        m.isdelete = true;
+        return m;
+      }
+      return m;
+    });
+
+    setCountMsgInbox(countMsgInbox - 1);
+    setCountMsgDelete(countMsgDelete + 1);
+
+    setInbox(newInbox.filter((m) => m.isdelete === false));
+  }
+
+  /**
+   * Marca los mensajes seleccionado como Leidos
+   * @param event 
+   * @param id del mensaje que sera marcado como leido
+   */
   const handleClickRead = (event: React.MouseEvent<unknown>, id: number) => {
     const msg = MessageData.filter((item) => item.id === id);
 
@@ -159,7 +114,7 @@ const Inbox = () => {
     const contactResponse = [{ nombre: msg[0]["personfor"], email: msg[0]["email"] }]
     setContact(contactResponse)
 
-    const newAllMessages = allMessages.map((m) => {
+    const newInbox = inbox.map((m) => {
       if (m.id === id) {
         m.read = true;
         return m;
@@ -167,26 +122,89 @@ const Inbox = () => {
       return m;
     });
 
-    setAllMessages(newAllMessages);
+    setCountMsgRead(countMsgRead - 1);
+    setInbox(newInbox);
   };
+
+  /**
+   * Abre la Ventada Modal para componer un mensaje
+   * @param isOpen indica si se abre o no la ventana Modal
+   * @param titleModal Titulo de la ventana modal
+   * @param response indica el modo Respuesta a un mensaje
+   */
+  const openComposeMail = (isOpen: boolean, titleModal: string, response: boolean) => {
+
+    setVCompose(isOpen);
+    setTituloModal(titleModal);
+    setResponseMail(response);
+  }
+
+  /**
+   * Abre la Ventada Modal para Configurar la Cuenta de mail
+   * @param isOpen indica si se abre o no la ventana Modal
+   */
+  const openSettingMail = (isOpen: boolean) => {
+
+    setVSetting(isOpen);
+
+  }
+
+  /**
+   * Seleciona el Mensaje y 
+   * Aumenta con contador de mensajes seleccionado
+   * @param id del mensaje seleccionado
+   */
+  const marckMessageInbox = (id: number) => {
+
+    if (id !== 0) {
+
+      //setListIdSelect([...listIdSelect, id])
+
+      setCountSelect(countSelect + 1);
+
+    } else {
+
+      setCountSelect(countSelect - 1);
+
+    }
+
+    console.log(listIdSelect);
+
+  }
+
+  /**
+   * Marca todos los mensajes de inbox
+   * @param countSelect cantidad de elementos seleccionados
+   * @param listId arreglos con los id de los mensajes seleccionados
+   */
+  const marckAllMessageInbox = (countSelect: number, listId: number[]) => {
+
+    setCountSelect(countSelect);
+    setListIdSelect(listId);
+
+    console.log(listIdSelect);
+
+  }
 
   return (
     <>
       <ToolBar
-        openCompose={openComposeDialog}
-        openSetting={openSettingModel}
+        openCompose={openComposeMail}
+        openSetting={openSettingMail}
       />
 
       <Splitter style={{ height: 500 }} panes={panes} onChange={onChange}>
         <div className="pane-content">
-          <Collapse countMessage={countMessage} countRead={countRead} />
+          <Collapse countMessage={countMsgInbox} countRead={countMsgRead} countDelete={countMsgDelete} />
         </div>
         <div className="pane-content">
           <MessagesList
-            dataList={allMessages}
-            onSelectItem={handleClickSelectMsg}
+            dataInbox={inbox}
+            onFilterInbox={filterMessagesInbox}
+            onSelectItem={marckMessageInbox}
             onClickRead={handleClickRead}
-            onSelectAll={handleSelectAllMsg}
+            onSelectAll={marckAllMessageInbox}
+            onDeleteMsgs={deleteMenssage}
           />
         </div>
         <div className="pane-content">
@@ -194,37 +212,24 @@ const Inbox = () => {
             <MessageDetails
               countSelect={countSelect}
               msg={itemSelectState}
-              openCompose={openComposeDialog}
-              openDialog={openDialogForm}
+              openCompose={openComposeMail}
             />
           </>
         </div>
       </Splitter>
       <div>
-        {viewCompose && (
+        {vCompose && (
           <ComponseForm
-            openCompose={openComposeDialog}
-            titulo={tituloModal}
-            flag={response}
+            openCompose={openComposeMail}
+            titleModal={tituloModal}
+            modeResponse={responseMail}
             msg={itemSelectState}
             contact={contact}
           />
         )}
       </div>
       <div>
-        {viewDialog && (
-          <WarningDialog
-            bStatus={true}
-            cTitle={dialogTitle}
-            cReference={refenrence}
-            cQuestion={dialogQuestion}
-            confirmDialog={confirmDialog}
-            closeWarning={closeDialogForm}
-          />
-        )}
-      </div>
-      <div>
-        {viewSetting && <SettingMail closeSetting={closeDialogForm} />}
+        {vSetting && <SettingMail closeSetting={openSettingMail} />}
       </div>
     </>
   );

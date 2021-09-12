@@ -16,6 +16,8 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 //import CircleOutlinedIcon from '@material-ui/icons/CircleOutlined';
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import ConfirmDialog from "../../ConfirmDialog";
+//import Notification from "../../Notification";
 
 const useStyles = makeStyles({
   paper: {
@@ -46,12 +48,12 @@ const useStyles = makeStyles({
   },
 });
 
-const MessageItem = ({ msg, onClickRead, onSelectItem, onSelectAll }) => {
+const MessageItem = ({ msg, onClickRead, onSelectItem, onSelectAll, onDeleteMsg}) => {
   const styles = useStyles();
 
   const [showBar, setShowBar] = useState(false);
   const [selectItem, setSelectItem] = useState(false);
-  const [viewDialog, setViewDialog] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
 
   const handleOverMouse = () => {
     setShowBar(true);
@@ -65,127 +67,134 @@ const MessageItem = ({ msg, onClickRead, onSelectItem, onSelectAll }) => {
 
      if (event.target.checked) {         
       
-      onSelectItem(event, id);
+      onSelectItem(id);
       setSelectItem(true);     
       
     } else {
       
       setSelectItem(false);     
-      onSelectItem(event, 0);
+      onSelectItem(0);
 
     }
   };
 
-  const handleOnClick = (id) => {
-    setViewDialog(true);
-    //onDelete(id);
-  };
+  const onDelete = (id) => {
+    
+    setConfirmDialog({
+        ...confirmDialog,
+        isOpen: false
+    })
+    onDeleteMsg(id);
+
+  }
 
   return (
-    <Paper
-      className={showBar || selectItem ? styles.paperOver : styles.paper}
-      onMouseOver={handleOverMouse}
-      onMouseOut={handleMouseOut}
-    >
-      <Grid container spacing={1}>
-        <Grid item>
-          <div className={showBar || selectItem || onSelectAll ? styles.hidden : styles.show}>
-            <AccountCircleIcon fontSize="large" />
-          </div>
-          <div className={showBar || selectItem || onSelectAll ? styles.show : styles.hidden}>
-            <Checkbox
-              icon={<CheckBoxOutlineBlankIcon />}
-              checked={selectItem || onSelectAll}
-              checkedIcon={<CheckCircleIcon color="primary" />}
-              color="default"
-              name={"chkMsg-" + msg.id}
-              onChange={(event) => handleChangeSelectItem(event, msg.id)}              
-            />
-          </div>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid
-            item
-            xs
-            container
-            direction="column"
-            spacing={2}
-            onClick={(event) => onClickRead(event, msg.id)}
-          >
-            <Grid item xs>
-              <Typography variant="subtitle1">
-                {msg.read === true ? msg.personfor : <b> {msg.personfor} </b>}                
-              </Typography>
-              <Typography variant="body2" color="primary">
-                {msg.read === true ? msg.subject.substr(0, 40) + " ..." : <b> {msg.subject.substr(0, 40) + " ..."} </b>}                    
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                <div dangerouslySetInnerHTML={{ __html: msg.body.substr(0, 60) + " ..." }} />                
-              </Typography>
-            </Grid>
-            <Grid item></Grid>
-          </Grid>
+    <>
+      <Paper
+        className={showBar || selectItem ? styles.paperOver : styles.paper}
+        onMouseOver={handleOverMouse}
+        onMouseOut={handleMouseOut}
+      >
+        <Grid container spacing={1}>
           <Grid item>
-            <div className={showBar ? styles.hidden : styles.show}>
-              {msg.importance === "alta" ? (
-                <PriorityHighIcon fontSize="small" color="primary" />
-              ) : (
-                ""
-              )}
-              {msg.attached ? (
-                <AttachFileIcon fontSize="small" color="primary" />
-              ) : (
-                ""
-              )}
-              {msg.marked ? ( 
-                <FlagIcon fontSize="small" color="primary" />
-              ):(
-                ""
-              )}
+            <div className={showBar || selectItem || onSelectAll ? styles.hidden : styles.show}>
+              <AccountCircleIcon fontSize="large" />
             </div>
-            <div className={showBar ? styles.show : styles.hidden}>
-              <ButtonGroup size="small">
-                <Tooltip title="Eliminar">
-                  <IconButton>
-                    <DeleteIcon fontSize="small" onClick={ () => (handleOnClick(msg.id))} />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Marcar como no leído">
-                  <IconButton>
-                    <EmailIcon fontSize="small" />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Marcar este mensaje">
-                  <IconButton>
-                    <FlagIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Dejar este mensaje en la parte superior de la carpeta">
-                  <IconButton>
-                    <CheckIcon fontSize="small" />
-                  </IconButton>
-                </Tooltip>
-              </ButtonGroup>
+            <div className={showBar || selectItem || onSelectAll ? styles.show : styles.hidden}>
+              <Checkbox
+                icon={<CheckBoxOutlineBlankIcon />}
+                checked={selectItem || onSelectAll}
+                checkedIcon={<CheckCircleIcon color="primary" />}
+                color="default"
+                name={"chkMsg-" + msg.id}
+                onChange={(event) => handleChangeSelectItem(event, msg.id)}              
+              />
             </div>
           </Grid>
-        </Grid>
-      </Grid>
-    
-{/*      <div>
-        <IconButton aria-label="delete" onClick={() => setConfirmOpen(true)}>
-          <DeleteIcon />
-        </IconButton>
-        <ConfirmDialog
-          title="Delete Post?"
-          open={confirmOpen}
-          setOpen={setConfirmOpen}
-          onConfirm={deletePost}
-        >
-          Are you sure you want to delete this post?
-        </ConfirmDialog>
-      </div> */}
+          <Grid item xs={12} sm container>
+            <Grid
+              item
+              xs
+              container
+              direction="column"
+              spacing={2}
+              onClick={(event) => onClickRead(event, msg.id)}
+            >
+              <Grid item xs>
+                <Typography variant="subtitle1">
+                  {msg.read === true ? msg.personfor : <b> {msg.personfor} </b>}                
+                </Typography>
+                <Typography variant="body2" color="primary">
+                  {msg.read === true ? msg.subject.substr(0, 40) + " ..." : <b> {msg.subject.substr(0, 40) + " ..."} </b>}                    
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  <div dangerouslySetInnerHTML={{ __html: msg.body.substr(0, 60) + " ..." }} />                
+                </Typography>
+              </Grid>
+              <Grid item></Grid>
+            </Grid>
+            <Grid item>
+              <div className={showBar ? styles.hidden : styles.show}>
+                {msg.importance === "alta" ? (
+                  <PriorityHighIcon fontSize="small" color="primary" />
+                ) : (
+                  ""
+                )}
+                {msg.attached ? (
+                  <AttachFileIcon fontSize="small" color="primary" />
+                ) : (
+                  ""
+                )}
+                {msg.marked ? ( 
+                  <FlagIcon fontSize="small" color="primary" />
+                ):(
+                  ""
+                )}
+              </div>
+              <div className={showBar ? styles.show : styles.hidden}>
+                <ButtonGroup size="small">
+                  <Tooltip title="Eliminar">
+                    <IconButton>
+                      <DeleteIcon 
+                        fontSize="small"
+                        onClick={() => {
+                          setConfirmDialog({
+                              isOpen: true,
+                              title: '¿Estás seguro de eliminar este mensaje?',
+                              subTitle: "",
+                              onConfirm: () => { onDelete(msg.id) }
+                          })
+                        }}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Marcar como no leído">
+                    <IconButton>
+                      <EmailIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Marcar este mensaje">
+                    <IconButton>
+                      <FlagIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Dejar este mensaje en la parte superior de la carpeta">
+                    <IconButton>
+                      <CheckIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                </ButtonGroup>
+              </div>
+            </Grid>
+          </Grid>
+        </Grid>    
+      </Paper>
 
-    </Paper>
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
+    </>
   );
 };
 

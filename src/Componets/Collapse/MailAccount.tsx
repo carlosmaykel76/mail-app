@@ -13,6 +13,7 @@ import SendIcon from '@material-ui/icons/Send'
 interface MailAccountProps {
   countMsg: number;
   countRead: number;
+  countDelete: number;
 }
 
 declare module 'csstype' {
@@ -126,7 +127,7 @@ const useStyles = makeStyles(
   }),
 );
 
-const MailAccount: React.FC<MailAccountProps> = ({ countMsg, countRead }) => {
+const MailAccount: React.FC<MailAccountProps> = ({ countMsg, countRead, countDelete }) => {
   const styles = useStyles();
 
   return (
@@ -142,9 +143,14 @@ const MailAccount: React.FC<MailAccountProps> = ({ countMsg, countRead }) => {
         labelText="Bandeja de entrada"
         labelIcon={MailIcon}
         labelInfo={countRead.toString() + "/" + countMsg.toString()}
+      //onClick={() => { alert("dkdsnksdfkdl") }}
       />
       <StyledTreeItem nodeId="2" labelText="Enviado" labelIcon={SendIcon} labelInfo={""} />
-      <StyledTreeItem nodeId="3" labelText="Elementos Eliminados" labelIcon={DeleteIcon} labelInfo={""} />
+      <StyledTreeItem
+        nodeId="3"
+        labelText="Elementos Eliminados"
+        labelIcon={DeleteIcon}
+        labelInfo={countDelete.toString()} />
     </TreeView>
   );
 };

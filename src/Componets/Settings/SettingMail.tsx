@@ -6,13 +6,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import ToolBarSetting from "./ToolBarSetting";
 import DataView from "./DataView";
-import WarningDialog from "../Modals/WarningDialog";
+//import WarningDialog from "../Modals/WarningDialog";
 import ServerConfig from "./ServerConfig";
 
 import * as Data from "../../data/AccountMailData";
 
 interface SettingMailProps {
-  closeSetting: (cReference: string) => void;
+  closeSetting: (isOpen: boolean) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -61,17 +61,17 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
   ]);
 
   const [editConfigMail, setEditConfigMail] = useState(false);
-  const [viewDialog, setViewDialog] = useState(false);
-  const [warningBody, setWarningBody] = useState("");
+  //const [viewDialog, setViewDialog] = useState(false);
+  //const [warningBody, setWarningBody] = useState("");
   const [warningTitle, setWarningTitle] = useState("Confirmación");
 
   const closeSettingModel = () => {
-    closeSetting("SettingMail");
+    closeSetting(false);
   };
 
   const openWarningDialog = (flag: boolean, title: string, body: string) => {
-    setViewDialog(flag);
-    setWarningBody(body);
+    //setViewDialog(flag);
+    // setWarningBody(body);
     setWarningTitle(title === "" ? warningTitle : title);
   };
 

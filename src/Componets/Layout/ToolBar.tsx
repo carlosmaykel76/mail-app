@@ -41,7 +41,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
 }) => {
   const styles = useStyles();
 
-  const openModal = () => {
+  const openComposeMail = () => {
     openCompose(true, "Nuevo Mensaje", false);
   };
 
@@ -52,7 +52,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
   return (
     <div className={styles.toolbar}>
       <Button
-        onClick={openModal}
+        onClick={openComposeMail}
         variant="contained"
         color="primary"
         className={styles.button}

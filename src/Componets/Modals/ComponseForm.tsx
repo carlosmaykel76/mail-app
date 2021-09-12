@@ -13,8 +13,8 @@ import ContactModal from './ContactModal';
 
 interface ComponseFormProps {
   openCompose: (n: boolean, t: string, f: boolean) => void;
-  titulo: string;
-  flag: boolean;
+  titleModal: string;
+  modeResponse: boolean;
   msg: Array<IMessage>;
   contact: Array<IContacts>;
 }
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, msg, contact }) => {
+const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titleModal, modeResponse, msg, contact }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [visible, setVisible] = React.useState(true);
   const [viewAttach, setViewAttach] = React.useState(false);
@@ -54,7 +54,7 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
   //const contactResponse = [{ nombre: '', email: "" }];
 
   const closeComposeDialog = () => {
-    openCompose(!visible, "", false);
+    openCompose(false, "", false);
   };
 
   const openAttachDialog = () => {
@@ -72,7 +72,7 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
   return (
     <>
       <Window
-        title={titulo}
+        title={titleModal}
         onClose={closeComposeDialog}
         initialHeight={600}
         initialWidth={800}
@@ -95,7 +95,7 @@ const ComponseForm: React.FC<ComponseFormProps> = ({ openCompose, titulo, flag, 
                 id="to"
                 options={contactData}
                 getOptionLabel={(option) => option.nombre + " (" + option.email + ")"}
-                defaultValue={flag ? [contact[0]] : []}
+                defaultValue={modeResponse ? [contact[0]] : []}
                 renderInput={(params) => (
                   <TextField {...params} size="small" />
                 )}

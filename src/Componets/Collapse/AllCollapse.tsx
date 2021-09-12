@@ -59,11 +59,12 @@ const AccordionDetails = withStyles((theme) => ({
 interface AllCollapseProps {
   countMessage: number;
   countRead: number;
+  countDelete: number;
 }
 
-const AllCollapse: React.FC<AllCollapseProps> = ({ countMessage, countRead }) => {
+const AllCollapse: React.FC<AllCollapseProps> = ({ countMessage, countRead, countDelete }) => {
 
-  const [expanded, setExpanded] = React.useState<string | false>("panel1");
+  const [expanded, setExpanded] = React.useState<string | false>("pnAccountMail");
 
   const handleChange =
     (panel: string) => (event: React.ChangeEvent<{}>, newExpanded: boolean) => {
@@ -108,7 +109,7 @@ const AllCollapse: React.FC<AllCollapseProps> = ({ countMessage, countRead }) =>
           <Typography>Cuenta de Correo</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <MailAccount countMsg={countMessage} countRead={countRead} />
+          <MailAccount countMsg={countMessage} countRead={countRead} countDelete={countDelete} />
         </AccordionDetails>
       </Accordion>
       <Accordion

@@ -23,7 +23,6 @@ interface IMessageDetailsProps {
   countSelect: number;
   msg: Array<IMessage>;
   openCompose: (n: boolean, t: string, f: boolean) => void;
-  openDialog: (w: boolean, title: string, question: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,7 +73,6 @@ const MessageDetails: React.FC<IMessageDetailsProps> = ({
   countSelect,
   msg,
   openCompose,
-  openDialog,
 }) => {
   const styles = useStyles();
 

@@ -13,7 +13,7 @@ const MessageData: Array<IMessage> = [
     size: "5kb",
     read: true,
     marked: true,
-    isdelete: false,
+    isdelete: true,
     body: "Et vehicula libero proin tellus augue risus vel torquent. Tellus malesuada duis fermentum sagittis purus. Aenean phasellus proin nostra sit laoreet feugiat. Suscipit adipiscing sociosqu elit aenean ut. <br/>Tortor hac dolor massa ligula congue. Consequat integer fusce duis. Orci integer vel amet sed. Erat quam dolor consectetur venenatis orci facilisis lobortis congue. Aptent mattis pellentesque ad etiam lectus conubia senectus maecenas. Non ac mi faucibus rutrum.",
   },
   {
