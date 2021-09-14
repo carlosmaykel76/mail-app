@@ -12,10 +12,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
-interface contactModalProps {
-    openContacts: (n: boolean) => void;
-}
+import { contactModalProps } from "../../interfaces/mail.interface"
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

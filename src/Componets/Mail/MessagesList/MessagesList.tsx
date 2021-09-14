@@ -2,21 +2,13 @@ import React, { useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { IMessage } from "../../mail.interface";
+import { IMessage } from "../../../interfaces/mail.interface";
 import MessageItem from "../Message/MessageItem";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import Tooltip from "@material-ui/core/Tooltip";
 import FilterMessage from "../../FilterMessages";
-
-interface IMessageListProps {
-  dataInbox: Array<IMessage>;
-  onFilterInbox: (id: number) => void;
-  onSelectItem: (id: number) => void;
-  onClickRead: (event: React.MouseEvent<unknown>, id: number) => void;
-  onSelectAll: (countSelect: number, listId: number[]) => void;
-  onDeleteMsgs: (idMessage: number) => void;
-}
+import { IMessageListProps } from "../../../interfaces/mail.interface"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,6 +44,8 @@ const MessageList: React.FC<IMessageListProps> = ({
 
     const aListId: number[] = [];
 
+    alert(event.target.checked);
+
     if (event.target.checked === true) {
       // eslint-disable-next-line
       dataInbox.map((m) => {
@@ -67,6 +61,7 @@ const MessageList: React.FC<IMessageListProps> = ({
       SetSelectAllMsg(false);
 
     }
+
   };
 
   return (

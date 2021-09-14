@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-
 import {
   Grid,
   Paper,
@@ -9,8 +8,6 @@ import {
   Button,
 } from "@material-ui/core";
 import Tooltip from "@material-ui/core/Tooltip";
-import { IMessage } from "../../mail.interface";
-
 import ReplyIcon from "@material-ui/icons/Reply";
 import ReplyAllIcon from "@material-ui/icons/ReplyAll";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -18,12 +15,7 @@ import FlagIcon from "@material-ui/icons/Flag";
 import EmailIcon from "@material-ui/icons/Email";
 import svgMsgDetails from "../../../imgs/MessageDetails.svg";
 import svgMsgSelected from "../../../imgs/messageSelected.svg";
-
-interface IMessageDetailsProps {
-  countSelect: number;
-  msg: Array<IMessage>;
-  openCompose: (n: boolean, t: string, f: boolean) => void;
-}
+import { IMessageDetailsProps } from "../../../interfaces/mail.interface"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

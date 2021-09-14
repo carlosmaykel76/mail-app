@@ -1,4 +1,4 @@
-import { IFilter } from "./mail.interface";
+import { IFilter } from "../interfaces/mail.interface";
 
 export const msgEliminar: string =
   "Esta seguro de que desea eliminar el mensaje seleccionado";

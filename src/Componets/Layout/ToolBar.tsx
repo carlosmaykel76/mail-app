@@ -1,11 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-interface ToolbarProps {
-  openCompose: (n: boolean, t: string, f: boolean) => void;
-  openSetting: (n: boolean) => void;
-}
+import { ToolbarProps } from "../../interfaces/mail.interface"
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {

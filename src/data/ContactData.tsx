@@ -1,4 +1,4 @@
-import { IContacts } from "../Componets/mail.interface"
+import { IContacts } from "../interfaces/mail.interface"
 
 const contactData: IContacts[] = [
     { nombre: 'Carlos Maykel Lopez', email: "carlos.lopez@telematel.com" },

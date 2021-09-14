@@ -4,11 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Grid, TextField, MenuItem } from "@material-ui/core";
 import * as Data from "../../data/AccountMailData";
-
-interface ServerConfigProps {
-  editConfig: boolean;
-  configSelect: Array<Data.IAccountMail>;
-}
+import { ServerConfigProps } from "../../interfaces/mail.interface"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

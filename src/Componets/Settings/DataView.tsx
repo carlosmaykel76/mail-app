@@ -5,19 +5,7 @@ import { TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import * as Data from "../../data/AccountMailData";
-
-interface DataViewProps {
-  dataList: Array<Data.IAccountMail>;
-  onSelect: (id: number) => void;
-}
-
-interface IDataView {
-  id: number;
-  fav: boolean;
-  cuenta: string;
-  usuario: string;
-  servidor: string;
-}
+import { DataViewProps, IDataView } from "../../interfaces/mail.interface";
 
 const useStyles = makeStyles({
   container: {

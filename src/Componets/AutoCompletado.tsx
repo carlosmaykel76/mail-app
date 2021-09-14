@@ -1,7 +1,7 @@
 import React from 'react'
 import Autocomplete, { createFilterOptions } from "@material-ui/lab/Autocomplete";
 import { TextField } from "@material-ui/core";
-import { IContacts } from "./mail.interface";
+import { IContacts } from "../interfaces/mail.interface";
 import ContactData from "../data/ContactData";
 
 const filter = createFilterOptions<IContacts>();

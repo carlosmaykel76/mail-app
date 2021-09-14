@@ -7,17 +7,10 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import KendoEditor from "../KendoEditor";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import AttachModal from "./AttachModal";
-import { IContacts, IMessage } from "../mail.interface";
+import { IContacts, IMessage } from "../../interfaces/mail.interface";
 import contactData from "../../data/ContactData";
 import ContactModal from './ContactModal';
-
-interface ComponseFormProps {
-  openCompose: (n: boolean, t: string, f: boolean) => void;
-  titleModal: string;
-  modeResponse: boolean;
-  msg: Array<IMessage>;
-  contact: Array<IContacts>;
-}
+import { ComponseFormProps } from "../../interfaces/mail.interface"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

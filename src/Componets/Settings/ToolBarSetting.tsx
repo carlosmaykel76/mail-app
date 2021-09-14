@@ -11,12 +11,7 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import SaveIcon from "@material-ui/icons/Save";
 import UndoIcon from "@material-ui/icons/Undo";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-
-interface ToolBarSettingProps {
-  closeSetting: (n: boolean) => void;
-  openWarning: (w: boolean, title: string, body: string) => void;
-  isSelect: boolean;
-}
+import { ToolBarSettingProps } from "../../interfaces/mail.interface"
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {

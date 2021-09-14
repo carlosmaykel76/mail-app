@@ -6,14 +6,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 import ToolBarSetting from "./ToolBarSetting";
 import DataView from "./DataView";
-//import WarningDialog from "../Modals/WarningDialog";
 import ServerConfig from "./ServerConfig";
-
-import * as Data from "../../data/AccountMailData";
-
-interface SettingMailProps {
-  closeSetting: (isOpen: boolean) => void;
-}
+import AccountMailData from "../../data/AccountMailData";
+import { IAccountMail, SettingMailProps } from "../../interfaces/mail.interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,11 +47,11 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
   };
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [allConfigMail, SetAllConfigMail] = useState<Data.IAccountMail[]>(
-    Data.AccountMailData
+  const [allConfigMail, SetAllConfigMail] = useState<IAccountMail[]>(
+    AccountMailData
   );
 
-  const [itemSelectState, setItemSelectState] = useState<Data.IAccountMail[]>([
+  const [itemSelectState, setItemSelectState] = useState<IAccountMail[]>([
     initAccountMail,
   ]);
 
@@ -76,7 +71,7 @@ const SettingMail: React.FC<SettingMailProps> = ({ closeSetting }) => {
   };
 
   const handleOnSelect = (id: number) => {
-    const config = Data.AccountMailData.filter((item) => item.id === id);
+    const config = AccountMailData.filter((item) => item.id === id);
 
     setItemSelectState(config);
     setEditConfigMail(true);

@@ -8,7 +8,7 @@ import MessagesList from "../Componets/Mail/MessagesList/MessagesList";
 import MessageDetails from "../Componets/Mail/MessageDetails/MessageDetails";
 import SettingMail from "../Componets/Settings/SettingMail";
 import MessageData from "../data/MessageData";
-import { IMessage, IContacts } from "./mail.interface";
+import { IMessage, IContacts } from "../interfaces/mail.interface";
 import "../Styles/App.css";
 
 const Inbox = () => {
@@ -168,8 +168,6 @@ const Inbox = () => {
 
     }
 
-    console.log(listIdSelect);
-
   }
 
   /**
@@ -182,7 +180,7 @@ const Inbox = () => {
     setCountSelect(countSelect);
     setListIdSelect(listId);
 
-    console.log(listIdSelect);
+    console.log(listId);
 
   }
 

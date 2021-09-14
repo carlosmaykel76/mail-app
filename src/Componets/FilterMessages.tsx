@@ -4,14 +4,10 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { MenuList, MenuItem, Button } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { listFilter } from "../Componets/parameters";
-import { IFilter } from "./mail.interface";
+import { IFilter, IFilterMessagesProps } from "../interfaces/mail.interface";
 
 import Grow from "@material-ui/core/Grow";
 import Popper from "@material-ui/core/Popper";
-
-interface IFilterMessagesProps {
-  onClick: (id: number) => void;
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

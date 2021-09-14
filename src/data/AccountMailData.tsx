@@ -1,40 +1,6 @@
-export interface IAccountMail {
-  id: number;
-  fav: boolean;
-  cuenta: string;
-  usuario: string;
-  servidor: string;
-  imapServer: string;
-  imapPort: number;
-  imapUser: string;
-  imapPwd: string;
-  imapCifrado: string;
-  smtpServer: string;
-  smtpPort: number;
-  smtpUser: string;
-  smtpPwd: string;
-  smptCifrado: string;
-}
+import { IAccountMail } from "../interfaces/mail.interface"
 
-/* export const initAccountMail = {
-  id: 0,
-  fav: false,
-  cuenta: "",
-  usuario: "",
-  servidor: "",
-  imapServer: "",
-  imapPort: 0,
-  imapUser: "",
-  imapPwd: "",
-  imapCifrado: "",
-  smtpServer: "",
-  smtpPort: 0,
-  smtpUser: "",
-  smtpPwd: "",
-  smptCifrado: "",
-}; */
-
-export const AccountMailData: Array<IAccountMail> = [
+const AccountMailData: Array<IAccountMail> = [
   {
     id: 1,
     fav: true,
@@ -88,4 +54,4 @@ export const AccountMailData: Array<IAccountMail> = [
   },
 ];
 
-//export default AccountMailData;
+export default AccountMailData;
