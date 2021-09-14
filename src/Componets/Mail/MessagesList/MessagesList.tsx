@@ -40,11 +40,14 @@ const MessageList: React.FC<IMessageListProps> = ({
   const styles = useStyles();
   const [selectAllMsg, SetSelectAllMsg] = useState(false);
 
+  /**
+   * Marca todos los mensajes de Inbox y 
+   * crea array con los Id de los mensajes
+   * @param event 
+   */
   const handleChangeAllMsg = (event: any) => {
 
     const aListId: number[] = [];
-
-    alert(event.target.checked);
 
     if (event.target.checked === true) {
       // eslint-disable-next-line

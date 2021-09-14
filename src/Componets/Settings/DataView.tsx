@@ -4,7 +4,6 @@ import { Table, TableBody, TableCell } from "@material-ui/core";
 import { TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import * as Data from "../../data/AccountMailData";
 import { DataViewProps, IDataView } from "../../interfaces/mail.interface";
 
 const useStyles = makeStyles({

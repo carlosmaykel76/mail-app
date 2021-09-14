@@ -7,7 +7,6 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import KendoEditor from "../KendoEditor";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import AttachModal from "./AttachModal";
-import { IContacts, IMessage } from "../../interfaces/mail.interface";
 import contactData from "../../data/ContactData";
 import ContactModal from './ContactModal';
 import { ComponseFormProps } from "../../interfaces/mail.interface"
