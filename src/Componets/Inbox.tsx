@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Splitter } from '@progress/kendo-react-layout';
-
 import ToolBar from './Layout/ToolBar';
 import ComponseForm from './Modals/ComponseForm';
 import Collapse from './Collapse/AllCollapse';
@@ -14,23 +13,13 @@ import { IMessage, IContacts } from '../interfaces/mail.interface';
 import '../Styles/App.css';
 
 const Inbox = () => {
-	const initMessageState = {
-		id: 0,
-		importance: '',
-		attached: false,
-		personfor: '',
-		email: '',
-		subject: '',
-		sent: '',
-		size: '',
-		read: false,
-		marked: false,
-		isdelete: false,
-		body: '',
-	};
 	// eslint-disable-next-line
 	const [mailBox, setMailBox] = useState<IMessage[]>(MessageData);
 	const [inbox, setInbox] = useState<IMessage[]>(MessageData.filter((m) => m.isdelete === false));
+	const [msgFolderActive, setMsgFolderActive] = useState<IMessage[]>(
+		MessageData.filter((m) => m.isdelete === true)
+	);
+	const [isFolder, setIsFolder] = useState('');
 	const [countMsgInbox, setCountMsgInbox] = useState(0);
 	const [countMsgRead, setCountMsgRead] = useState(0);
 	const [countMsgDelete, setCountMsgDelete] = useState(
@@ -65,20 +54,37 @@ const Inbox = () => {
 	 * Funcion que realiza el filtrado de la lista Inbox
 	 * @param id del filtro que se selecciono
 	 */
-	const filterMessagesInbox = (id: number) => {
-		switch (id) {
-			case 2:
-				setInbox(mailBox.filter((m) => m.read === false && m.isdelete === false));
-				break;
-			case 4:
-				setInbox(mailBox.filter((m) => m.marked === true && m.isdelete === false));
-				break;
-			case 6:
-				setInbox(mailBox.filter((m) => m.attached === true && m.isdelete === false));
-				break;
-			default:
-				setInbox(mailBox);
-				break;
+	const filterMessagesInbox = (idFilter: number) => {
+		if (isFolder === '') {
+			switch (idFilter) {
+				case 2:
+					setInbox(mailBox.filter((m) => m.read === false && m.isdelete === false));
+					break;
+				case 4:
+					setInbox(mailBox.filter((m) => m.marked === true && m.isdelete === false));
+					break;
+				case 6:
+					setInbox(mailBox.filter((m) => m.attached === true && m.isdelete === false));
+					break;
+				default:
+					setInbox(mailBox);
+					break;
+			}
+		} else {
+			switch (idFilter) {
+				case 2:
+					setMsgFolderActive(mailBox.filter((m) => m.read === false && m.isdelete === true));
+					break;
+				case 4:
+					setMsgFolderActive(mailBox.filter((m) => m.marked === true && m.isdelete === true));
+					break;
+				case 6:
+					setMsgFolderActive(mailBox.filter((m) => m.attached === true && m.isdelete === true));
+					break;
+				default:
+					setMsgFolderActive(mailBox);
+					break;
+			}
 		}
 	};
 
@@ -124,6 +130,22 @@ const Inbox = () => {
 
 		setCountMsgRead(countMsgRead - 1);
 		setInbox(newInbox);
+	};
+
+	/**
+	 * Lista los mensajes de la carpeta que viene como parametro
+	 * @param folder de la cual se listaran los mensajes
+	 */
+	const changeFolderMail = (folder: string) => {
+		switch (folder) {
+			case 'Deleted':
+				setIsFolder('Deleted');
+				setMsgFolderActive(mailBox.filter((m) => m.isdelete === true));
+				break;
+			default:
+				setIsFolder('');
+				break;
+		}
 	};
 
 	/**
@@ -183,11 +205,12 @@ const Inbox = () => {
 						countMessage={countMsgInbox}
 						countRead={countMsgRead}
 						countDelete={countMsgDelete}
+						showFolder={changeFolderMail}
 					/>
 				</div>
 				<div className='pane-content'>
 					<MessagesList
-						dataInbox={inbox}
+						dataInbox={isFolder === '' ? inbox : msgFolderActive}
 						onFilterInbox={filterMessagesInbox}
 						onSelectItem={marckMessageInbox}
 						onClickRead={handleClickRead}

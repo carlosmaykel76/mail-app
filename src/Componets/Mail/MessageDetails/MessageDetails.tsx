@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Grid, Paper, ButtonGroup, IconButton, Button } from '@material-ui/core';
+import { Grid, Paper, ButtonGroup, IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import ReplyIcon from '@material-ui/icons/Reply';
 import ReplyAllIcon from '@material-ui/icons/ReplyAll';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FlagIcon from '@material-ui/icons/Flag';
 import svgMsgDetails from '../../../imgs/MessageDetails.svg';
-import svgMsgSelected from '../../../imgs/messageSelected.svg';
 import MessagesSelects from './MessagesSelects';
 import { IMessageDetailsProps } from '../../../interfaces/mail.interface';
 
