@@ -3,7 +3,7 @@
 import React from 'react';
 import { Grid, Button } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import svgMsgSelected from '../../../imgs/messageSelected.svg';
+import svgMsgSelected from '../../imgs/messageSelected.svg';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FlagIcon from '@material-ui/icons/Flag';
 import EmailIcon from '@material-ui/icons/Email';

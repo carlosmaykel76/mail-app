@@ -18,7 +18,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 //import CircleOutlinedIcon from '@material-ui/icons/CircleOutlined';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ConfirmDialog from '../../ConfirmDialog';
+import ConfirmDialog from '../ConfirmDialog';
 //import Notification from "../../Notification";
 
 const useStyles = makeStyles({

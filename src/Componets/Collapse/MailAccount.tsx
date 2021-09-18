@@ -10,6 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
+import EditIcon from '@material-ui/icons/Edit';
 import SendIcon from '@material-ui/icons/Send';
 import { MailAccountProps } from '../../interfaces/mail.interface';
 
@@ -153,8 +154,10 @@ const MailAccount: React.FC<MailAccountProps> = ({
 				}}
 			/>
 			<StyledTreeItem nodeId='2' labelText='Enviado' labelIcon={SendIcon} labelInfo={''} />
+			<StyledTreeItem nodeId='3' labelText='Borradores' labelIcon={EditIcon} labelInfo={''} />
+
 			<StyledTreeItem
-				nodeId='3'
+				nodeId='4'
 				labelText='Elementos Eliminados'
 				labelIcon={DeleteIcon}
 				labelInfo={''}

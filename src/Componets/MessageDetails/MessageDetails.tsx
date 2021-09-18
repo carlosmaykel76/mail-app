@@ -7,9 +7,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ReplyIcon from '@material-ui/icons/Reply';
 import ReplyAllIcon from '@material-ui/icons/ReplyAll';
 import DeleteIcon from '@material-ui/icons/Delete';
-import svgMsgDetails from '../../../imgs/MessageDetails.svg';
+import svgMsgDetails from '../../imgs/MessageDetails.svg';
 import MessagesSelects from './MessagesSelects';
-import { IMessageDetailsProps } from '../../../interfaces/mail.interface';
+import { IMessageDetailsProps } from '../../interfaces/mail.interface';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
