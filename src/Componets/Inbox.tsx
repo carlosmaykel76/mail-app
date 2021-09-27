@@ -117,7 +117,7 @@ const Inbox = () => {
 
 		setItemSelectState(msg);
 
-		const contactResponse = [{ nombre: msg[0]['personfor'], email: msg[0]['email'] }];
+		const contactResponse = [{ idContact: 1, nombre: msg[0]['personfor'], email: msg[0]['email'] }];
 		setContact(contactResponse);
 
 		const newInbox = inbox.map((m) => {

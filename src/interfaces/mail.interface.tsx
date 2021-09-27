@@ -44,12 +44,12 @@ export interface IFilterMessagesProps {
 
 export interface IContacts {
 	idContact: number;
-	Avatar: string;
+	Avatar?: string;
 	nombre: string;
 	email: string;
-	empresaPuesto: string;
-	empresaDpto: string;
-	empresaDireccion: string;
+	empresaPuesto?: string;
+	empresaDpto?: string;
+	empresaDireccion?: string;
 }
 
 export interface ToolbarProps {
