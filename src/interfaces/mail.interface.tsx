@@ -43,9 +43,13 @@ export interface IFilterMessagesProps {
 }
 
 export interface IContacts {
-	inputValue?: string;
+	idContact: number;
+	Avatar: string;
 	nombre: string;
-	email?: string;
+	email: string;
+	empresaPuesto: string;
+	empresaDpto: string;
+	empresaDireccion: string;
 }
 
 export interface ToolbarProps {
