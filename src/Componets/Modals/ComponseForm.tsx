@@ -10,7 +10,7 @@ import KendoEditor from '../KendoEditor';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AttachModal from './AttachModal';
 import contactData from '../../data/ContactData';
-import ContactModal from './ContactModal';
+import ContactModal from './SearchContacts';
 import { ComponseFormProps } from '../../interfaces/mail.interface';
 
 const useStyles = makeStyles((theme: Theme) =>

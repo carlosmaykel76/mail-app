@@ -55,6 +55,7 @@ export interface IContacts {
 export interface ToolbarProps {
 	openCompose: (n: boolean, t: string, f: boolean) => void;
 	openSetting: (n: boolean) => void;
+	openContactBook: (n: boolean) => void;
 }
 
 export interface IMessageDetailsProps {
@@ -80,7 +81,7 @@ export interface ComponseFormProps {
 	contact: Array<IContacts>;
 }
 
-export interface contactModalProps {
+export interface searchContactProps {
 	openContacts: (n: boolean) => void;
 }
 
@@ -124,4 +125,9 @@ export interface AllCollapseProps {
 	countRead: number;
 	countDelete: number;
 	showFolder: (folder: string) => void;
+}
+
+export interface ContactBookProps {
+	openContactBook: (n: boolean) => void;
+	ContactData: Array<IContacts>;
 }

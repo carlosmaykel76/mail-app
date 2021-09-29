@@ -7,7 +7,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import contactData from '../../data/ContactData';
 import KendoEditor from '../KendoEditor';
-import ContactModal from '../Modals/ContactModal';
+import SearchContact from '../Modals/SearchContacts';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

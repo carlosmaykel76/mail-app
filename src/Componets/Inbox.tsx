@@ -11,6 +11,8 @@ import SettingMail from '../Componets/Settings/SettingMail';
 import MessageData from '../data/MessageData';
 import { IMessage, IContacts } from '../interfaces/mail.interface';
 import '../Styles/App.css';
+import ContactBook from './Modals/ContactBook';
+import ContactList from '../data/ContactData';
 
 const Inbox = () => {
 	// eslint-disable-next-line
@@ -27,6 +29,7 @@ const Inbox = () => {
 	);
 	const [vSetting, setVSetting] = useState(false);
 	const [vCompose, setVCompose] = useState(false);
+	const [vContactBook, setVContactBook] = useState(false);
 	const [tituloModal, setTituloModal] = useState('Nuevo Mensaje');
 	const [responseMail, setResponseMail] = useState(false);
 	const [countSelect, setCountSelect] = useState(0);
@@ -168,6 +171,10 @@ const Inbox = () => {
 		setVSetting(isOpen);
 	};
 
+	const openContactBook = (isOpen: boolean) => {
+		setVContactBook(isOpen);
+	};
+
 	/**
 	 * Seleciona el Mensaje y
 	 * Aumenta con contador de mensajes seleccionado
@@ -197,7 +204,11 @@ const Inbox = () => {
 
 	return (
 		<>
-			<ToolBar openCompose={openComposeMail} openSetting={openSettingMail} />
+			<ToolBar
+				openCompose={openComposeMail}
+				openSetting={openSettingMail}
+				openContactBook={openContactBook}
+			/>
 
 			<Splitter style={{ height: 500 }} panes={panes} onChange={onChange}>
 				<div className='pane-content'>
@@ -240,6 +251,11 @@ const Inbox = () => {
 				)}
 			</div>
 			<div>{vSetting && <SettingMail closeSetting={openSettingMail} />}</div>
+			<div>
+				{vContactBook && (
+					<ContactBook openContactBook={openContactBook} ContactData={ContactList} />
+				)}
+			</div>
 		</>
 	);
 };

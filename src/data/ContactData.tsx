@@ -59,8 +59,8 @@ const contactData: IContacts[] = [
 	{
 		idContact: 6,
 		Avatar: '',
-		nombre: 'Alexia Llorente',
-		email: 'brefassannelle@yopmail.com',
+		nombre: 'Alejandra Elvira',
+		email: 'allradkipper@emvil.com',
 		empresaPuesto: '',
 		empresaDpto: '',
 		empresaDireccion: '',
