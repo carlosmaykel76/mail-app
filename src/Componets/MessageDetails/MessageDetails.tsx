@@ -59,7 +59,8 @@ const MessageDetails: React.FC<IMessageDetailsProps> = ({ countSelect, msg, open
 	const styles = useStyles();
 
 	const openModal = () => {
-		openCompose(true, 'Respuesta al Mensaje', true);
+		const contactResponse = [{ idContact: 1, nombre: msg[0].personfor, email: msg[0].email }];
+		openCompose(true, 'Respuesta al Mensaje', true, contactResponse);
 	};
 
 	return countSelect === 0 && msg.length === 0 ? (

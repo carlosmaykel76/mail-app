@@ -77,6 +77,7 @@ const MessageList: React.FC<IMessageListProps> = ({
 									onChange={(event) => handleChangeAllMsg(event)}
 								/>
 							</Tooltip>
+							<b></b>
 						</div>
 					</Grid>
 					<Grid item xs={12} sm container>

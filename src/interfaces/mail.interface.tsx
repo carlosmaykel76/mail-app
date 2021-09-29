@@ -1,5 +1,8 @@
 /** @format */
 
+import { SvgIconProps } from '@material-ui/core';
+import { ElementType } from 'react';
+
 export interface IMessage {
 	id: number;
 	importance: string;
@@ -53,7 +56,7 @@ export interface IContacts {
 }
 
 export interface ToolbarProps {
-	openCompose: (n: boolean, t: string, f: boolean) => void;
+	openCompose: (n: boolean, t: string, f: boolean, contactResponse: Array<IContacts>) => void;
 	openSetting: (n: boolean) => void;
 	openContactBook: (n: boolean) => void;
 }
@@ -61,7 +64,7 @@ export interface ToolbarProps {
 export interface IMessageDetailsProps {
 	countSelect: number;
 	msg: Array<IMessage>;
-	openCompose: (n: boolean, t: string, f: boolean) => void;
+	openCompose: (n: boolean, t: string, f: boolean, contactResponse: Array<IContacts>) => void;
 }
 
 export interface IMessageListProps {
@@ -74,7 +77,7 @@ export interface IMessageListProps {
 }
 
 export interface ComponseFormProps {
-	openCompose: (n: boolean, t: string, f: boolean) => void;
+	openCompose: (n: boolean, t: string, f: boolean, contactResponse: Array<IContacts>) => void;
 	titleModal: string;
 	modeResponse: boolean;
 	msg: Array<IMessage>;
@@ -117,17 +120,25 @@ export interface MailAccountProps {
 	countMsg: number;
 	countRead: number;
 	countDelete: number;
-	showFolderMessage: (folder: string) => void;
+	showFolderMessage: (idFolder: number) => void;
 }
 
 export interface AllCollapseProps {
 	countMessage: number;
 	countRead: number;
 	countDelete: number;
-	showFolder: (folder: string) => void;
+	showFolder: (idFolder: number) => void;
 }
 
 export interface ContactBookProps {
 	openContactBook: (n: boolean) => void;
 	ContactData: Array<IContacts>;
+	openCompose: (n: boolean, t: string, f: boolean, contactResponse: Array<IContacts>) => void;
+}
+
+export interface IFolderMail {
+	idFolder: number;
+	Folder: string;
+	isFavorita: boolean;
+	icons: ElementType<SvgIconProps<'svg', {}>>;
 }

@@ -5,14 +5,11 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import Typography from '@material-ui/core/Typography';
-import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
-import EditIcon from '@material-ui/icons/Edit';
-import SendIcon from '@material-ui/icons/Send';
 import { MailAccountProps } from '../../interfaces/mail.interface';
+import FolderList from '../../data/FolderMail';
 
 declare module 'csstype' {
 	interface Properties {
@@ -133,8 +130,8 @@ const MailAccount: React.FC<MailAccountProps> = ({
 }) => {
 	const styles = useStyles();
 
-	const handleClick = (folder: string) => {
-		showFolderMessage(folder);
+	const handleClick = (idFolder: number) => {
+		showFolderMessage(idFolder);
 	};
 
 	return (
@@ -144,27 +141,19 @@ const MailAccount: React.FC<MailAccountProps> = ({
 			defaultCollapseIcon={<ArrowDropDownIcon />}
 			defaultExpandIcon={<ArrowRightIcon />}
 			defaultEndIcon={<div style={{ width: 24 }} />}>
-			<StyledTreeItem
-				nodeId='1'
-				labelText='Bandeja de entrada'
-				labelIcon={MailIcon}
-				labelInfo={countRead.toString() + '/' + countMsg.toString()}
-				onClick={() => {
-					handleClick('inbox');
-				}}
-			/>
-			<StyledTreeItem nodeId='2' labelText='Enviado' labelIcon={SendIcon} labelInfo={''} />
-			<StyledTreeItem nodeId='3' labelText='Borradores' labelIcon={EditIcon} labelInfo={''} />
-
-			<StyledTreeItem
-				nodeId='4'
-				labelText='Elementos Eliminados'
-				labelIcon={DeleteIcon}
-				labelInfo={''}
-				onClick={() => {
-					handleClick('Deleted');
-				}}
-			/>
+			{FolderList.map((f) => (
+				<StyledTreeItem
+					nodeId={f.idFolder.toString()}
+					labelText={f.Folder}
+					labelIcon={f.icons}
+					labelInfo={
+						f.Folder.includes('Entrada') ? countRead.toString() + '/' + countMsg.toString() : ''
+					}
+					onClick={() => {
+						handleClick(f.idFolder);
+					}}
+				/>
+			))}
 		</TreeView>
 	);
 };

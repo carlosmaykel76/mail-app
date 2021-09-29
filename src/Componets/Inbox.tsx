@@ -13,6 +13,7 @@ import { IMessage, IContacts } from '../interfaces/mail.interface';
 import '../Styles/App.css';
 import ContactBook from './Modals/ContactBook';
 import ContactList from '../data/ContactData';
+import ForderList from '../data/FolderMail';
 
 const Inbox = () => {
 	// eslint-disable-next-line
@@ -22,6 +23,7 @@ const Inbox = () => {
 		MessageData.filter((m) => m.isdelete === true)
 	);
 	const [isFolder, setIsFolder] = useState('');
+	const [activeFolder, setActiveFolder] = useState('');
 	const [countMsgInbox, setCountMsgInbox] = useState(0);
 	const [countMsgRead, setCountMsgRead] = useState(0);
 	const [countMsgDelete, setCountMsgDelete] = useState(
@@ -120,7 +122,7 @@ const Inbox = () => {
 
 		setItemSelectState(msg);
 
-		const contactResponse = [{ idContact: 1, nombre: msg[0]['personfor'], email: msg[0]['email'] }];
+		const contactResponse = [{ idContact: 1, nombre: msg[0].personfor, email: msg[0].email }];
 		setContact(contactResponse);
 
 		const newInbox = inbox.map((m) => {
@@ -139,10 +141,11 @@ const Inbox = () => {
 	 * Lista los mensajes de la carpeta que viene como parametro
 	 * @param folder de la cual se listaran los mensajes
 	 */
-	const changeFolderMail = (folder: string) => {
-		switch (folder) {
-			case 'Deleted':
-				setIsFolder('Deleted');
+	const changeFolderMail = (idFolder: number) => {
+		setIsFolder(ForderList.filter((f) => f.idFolder === idFolder)[0].Folder);
+
+		switch (idFolder) {
+			case 4:
 				setMsgFolderActive(mailBox.filter((m) => m.isdelete === true));
 				break;
 			default:
@@ -157,10 +160,16 @@ const Inbox = () => {
 	 * @param titleModal Titulo de la ventana modal
 	 * @param response indica el modo Respuesta a un mensaje
 	 */
-	const openComposeMail = (isOpen: boolean, titleModal: string, response: boolean) => {
+	const openComposeMail = (
+		isOpen: boolean,
+		titleModal: string,
+		response: boolean,
+		contactResponse: Array<IContacts>
+	) => {
 		setVCompose(isOpen);
 		setTituloModal(titleModal);
 		setResponseMail(response);
+		setContact(contactResponse);
 	};
 
 	/**
@@ -171,6 +180,10 @@ const Inbox = () => {
 		setVSetting(isOpen);
 	};
 
+	/**
+	 * Abre la agenda de contactos
+	 * @param isOpen indica si se abre o no la ventana Modal
+	 */
 	const openContactBook = (isOpen: boolean) => {
 		setVContactBook(isOpen);
 	};
@@ -204,6 +217,7 @@ const Inbox = () => {
 
 	return (
 		<>
+			<div>{vSetting && <SettingMail closeSetting={openSettingMail} />}</div>
 			<ToolBar
 				openCompose={openComposeMail}
 				openSetting={openSettingMail}
@@ -240,6 +254,15 @@ const Inbox = () => {
 				</div>
 			</Splitter>
 			<div>
+				{vContactBook && (
+					<ContactBook
+						openContactBook={openContactBook}
+						ContactData={ContactList}
+						openCompose={openComposeMail}
+					/>
+				)}
+			</div>
+			<div>
 				{vCompose && (
 					<ComponseForm
 						openCompose={openComposeMail}
@@ -248,12 +271,6 @@ const Inbox = () => {
 						msg={itemSelectState}
 						contact={contact}
 					/>
-				)}
-			</div>
-			<div>{vSetting && <SettingMail closeSetting={openSettingMail} />}</div>
-			<div>
-				{vContactBook && (
-					<ContactBook openContactBook={openContactBook} ContactData={ContactList} />
 				)}
 			</div>
 		</>

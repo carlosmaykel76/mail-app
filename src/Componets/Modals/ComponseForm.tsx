@@ -54,7 +54,7 @@ const ComponseForm: React.FC<ComponseFormProps> = ({
 	//const contactResponse = [{ nombre: '', email: "" }];
 
 	const closeComposeDialog = () => {
-		openCompose(false, '', false);
+		openCompose(false, '', false, []);
 	};
 
 	const openAttachDialog = () => {

@@ -1,14 +1,6 @@
 /** @format */
 
 import { IContacts } from '../interfaces/mail.interface';
-/**
- * 	idContact: number;
-	nombre: string;
-	email: string;
-	empresaPuesto: string;
-	empresaDpto: string;
-	empresaDireccion: string;
- */
 
 const contactData: IContacts[] = [
 	{
@@ -16,8 +8,8 @@ const contactData: IContacts[] = [
 		Avatar: '',
 		nombre: 'Carlos Maykel Lopez',
 		email: 'carlos.lopez@telematel.com',
-		empresaPuesto: '',
-		empresaDpto: '',
+		empresaPuesto: 'Desarrollador',
+		empresaDpto: 'Telematel',
 		empresaDireccion: '',
 	},
 	{

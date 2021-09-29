@@ -8,13 +8,12 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { TableContainer, Table, TableCell, TableBody, TableRow } from '@material-ui/core';
 import { Splitter, SplitterOnChangeEvent } from '@progress/kendo-react-layout';
 import { ContactBookProps } from '../../interfaces/mail.interface';
-import { Card, CardHeader, CardContent, CardActions } from '@material-ui/core';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { ButtonGroup, Grid } from '@material-ui/core';
 
-import Avatar from '@material-ui/core/Avatar';
+import EmailIcon from '@material-ui/icons/Email';
 import imgContact from '../../imgs/contact.png';
 import { IContacts } from '../../interfaces/mail.interface';
 
@@ -40,44 +39,7 @@ function searching(filter: string) {
 	};
 }
 
-/**
- * Devuelve un color aleatorio para cada contacto
- * @param string
- * @returns
- */
-function stringToColor(string: string) {
-	let hash = 0;
-	let i;
-
-	/* eslint-disable no-bitwise */
-	for (i = 0; i < string.length; i += 1) {
-		hash = string.charCodeAt(i) + ((hash << 5) - hash);
-	}
-
-	let color = '#';
-
-	for (i = 0; i < 3; i += 1) {
-		const value = (hash >> (i * 8)) & 0xff;
-		color += `00${value.toString(16)}`.substr(-2);
-	}
-	/* eslint-enable no-bitwise */
-
-	return color;
-}
-
-/**
- * Obtiene las Iniciales de nombre del contacto
- * @param name: Nombre del Contacto
- * @returns devuelve las iniciales del Contacto
- */
-function stringAvatar(name: string) {
-	return {
-		children: name.split(' ')[0][0] + name.split(' ')[1][0],
-		//children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-	};
-}
-
-const ContactBook: React.FC<ContactBookProps> = ({ openContactBook, ContactData }) => {
+const ContactBook: React.FC<ContactBookProps> = ({ openContactBook, ContactData, openCompose }) => {
 	const styles = useStyles();
 
 	const [data, setData] = useState<IContacts[]>([]);
@@ -98,6 +60,10 @@ const ContactBook: React.FC<ContactBookProps> = ({ openContactBook, ContactData 
 		setPanes(event.newState);
 	};
 
+	const composeMail = (rNombre: string, rEmail: string) => {
+		openCompose(true, 'Nuevo Mensaje', true, [{ idContact: 1, nombre: rNombre, email: rEmail }]);
+	};
+
 	const closeModal = () => {
 		openContactBook(false);
 	};
@@ -115,7 +81,7 @@ const ContactBook: React.FC<ContactBookProps> = ({ openContactBook, ContactData 
 			modal
 			draggable>
 			<div className={styles.Content}>
-				<Splitter style={{ height: 410, width: 765 }} panes={panes} onChange={onChange}>
+				<Splitter style={{ height: 410, width: 760 }} panes={panes}>
 					<div className='pane-content'>
 						{data && (
 							<TextField
@@ -146,34 +112,88 @@ const ContactBook: React.FC<ContactBookProps> = ({ openContactBook, ContactData 
 					</div>
 					<div className='pane-content'>
 						{contactSelect.length > 0 ? (
-							<Paper style={{ margin: 'auto', maxWidth: 510 }}>
-								<Grid container spacing={1}>
-									<Grid item>
-										<img src={imgContact} alt={''} height='100' width='100' />
+							<>
+								<Paper style={{ margin: 'auto', maxWidth: 510, height: 400 }}>
+									<Grid container spacing={1}>
+										<Grid item>
+											<img src={imgContact} alt={''} height='100' width='100' />
+										</Grid>
+										<Grid item xs={12} sm container>
+											<Grid item xs container direction='column' spacing={1}>
+												<Grid item xs>
+													<Typography gutterBottom variant='h5' component='div'>
+														<b>{contactSelect[0].nombre}</b>
+													</Typography>
+													<Typography variant='body2' gutterBottom>
+														{contactSelect[0].empresaPuesto + ' - ' + contactSelect[0].empresaDpto}
+													</Typography>
+													<div>
+														<ButtonGroup size='small'>
+															<IconButton>
+																<EmailIcon
+																	color='primary'
+																	onClick={() =>
+																		composeMail(contactSelect[0].nombre, contactSelect[0].email)
+																	}
+																/>
+															</IconButton>
+														</ButtonGroup>
+													</div>
+												</Grid>
+											</Grid>
+										</Grid>
 									</Grid>
-									<Grid item xs={12} sm container>
-										<Grid item xs container direction='column' spacing={1}>
-											<Grid item xs>
-												<Typography gutterBottom variant='h5' component='div'>
-													<b>{contactSelect[0]['nombre']}</b>
+									<Typography variant='h6'>Información del Contacto</Typography>
+									<Grid container>
+										<Grid
+											item
+											xs={6}
+											direction='column'
+											style={{ borderRight: 'solid 2px #727272' }}>
+											<Typography variant='caption' style={{ color: '#505050' }}>
+												Correo Electronico
+											</Typography>
+											<Typography variant='body2' gutterBottom>
+												{contactSelect[0].email}
+											</Typography>
+											<Typography variant='caption' style={{ color: '#505050' }}>
+												Chatear
+											</Typography>
+											<Typography variant='body2' gutterBottom>
+												{contactSelect[0].email}
+											</Typography>
+										</Grid>
+										<Grid item xs={6} direction='column'>
+											<div style={{ marginLeft: 10 }}>
+												<Typography variant='caption' style={{ color: '#505050' }}>
+													Ubicación de la oficina
 												</Typography>
 												<Typography variant='body2' gutterBottom>
-													Full resolution 1920x1080 • JPEG
+													{contactSelect[0].email}
 												</Typography>
-												<Typography variant='body2'>ID: 1030114</Typography>
-											</Grid>
-											<Grid item>
-												<Typography style={{ cursor: 'pointer' }} variant='body2'>
-													Remove
+												<Typography variant='caption' style={{ color: '#505050' }}>
+													Puesto
 												</Typography>
-											</Grid>
-										</Grid>
-										<Grid item>
-											<Typography variant='subtitle1' component='div'></Typography>
+												<Typography variant='body2' gutterBottom>
+													{contactSelect[0].email}
+												</Typography>
+												<Typography variant='caption' style={{ color: '#505050' }}>
+													Departamento
+												</Typography>
+												<Typography variant='body2' gutterBottom>
+													{contactSelect[0].email}
+												</Typography>
+												<Typography variant='caption' style={{ color: '#505050' }}>
+													Dirección de la Empresa
+												</Typography>
+												<Typography variant='body2' gutterBottom>
+													{contactSelect[0].email}
+												</Typography>
+											</div>
 										</Grid>
 									</Grid>
-								</Grid>
-							</Paper>
+								</Paper>
+							</>
 						) : (
 							<b>Seleccione un Contacto</b>
 						)}

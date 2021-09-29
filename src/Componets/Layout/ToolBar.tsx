@@ -40,7 +40,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ openCompose, openSetting, openContact
 	const styles = useStyles();
 
 	const openComposeMail = () => {
-		openCompose(true, 'Nuevo Mensaje', false);
+		openCompose(true, 'Nuevo Mensaje', false, []);
 	};
 
 	const showSetting = () => {
