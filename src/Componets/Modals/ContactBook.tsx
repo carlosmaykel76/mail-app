@@ -198,25 +198,25 @@ const ContactBook: React.FC<ContactBookProps> = ({ openContactBook, ContactData,
 													Ubicación de la oficina
 												</Typography>
 												<Typography variant='body2' gutterBottom>
-													{contactSelect[0].email}
+													{contactSelect[0].locOficina}
 												</Typography>
 												<Typography variant='caption' style={{ color: '#505050' }}>
 													Puesto
 												</Typography>
 												<Typography variant='body2' gutterBottom>
-													{contactSelect[0].email}
+													{contactSelect[0].empresaPuesto}
 												</Typography>
 												<Typography variant='caption' style={{ color: '#505050' }}>
 													Departamento
 												</Typography>
 												<Typography variant='body2' gutterBottom>
-													{contactSelect[0].email}
+													{contactSelect[0].empresaDpto}
 												</Typography>
 												<Typography variant='caption' style={{ color: '#505050' }}>
 													Dirección de la Empresa
 												</Typography>
 												<Typography variant='body2' gutterBottom>
-													{contactSelect[0].email}
+													{contactSelect[0].empresaDireccion}
 												</Typography>
 											</div>
 										</Grid>

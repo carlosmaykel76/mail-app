@@ -50,6 +50,7 @@ export interface IContacts {
 	Avatar?: string;
 	nombre: string;
 	email: string;
+	locOficina?: string;
 	empresaPuesto?: string;
 	empresaDpto?: string;
 	empresaDireccion?: string;
