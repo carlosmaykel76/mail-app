@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Window, WindowActionsBar } from '@progress/kendo-react-dialogs';
 import { Button, TextField, IconButton } from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { TableContainer, Table, TableCell, TableBody, TableRow } from '@material-ui/core';
+import { TableContainer, Table, TableCell, TableBody, TableRow, Tooltip } from '@material-ui/core';
 import { Splitter, SplitterOnChangeEvent } from '@progress/kendo-react-layout';
 import { ContactBookProps } from '../../interfaces/mail.interface';
 
@@ -14,7 +14,11 @@ import Typography from '@material-ui/core/Typography';
 import { ButtonGroup, Grid } from '@material-ui/core';
 
 import EmailIcon from '@material-ui/icons/Email';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import imgContact from '../../imgs/contact.png';
+import imgContactos from '../../imgs/contactos.png';
 import { IContacts } from '../../interfaces/mail.interface';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,6 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		Content: {
 			padding: '2 2 2 2',
+		},
+		paper: {
+			padding: theme.spacing(2),
+			color: theme.palette.text.secondary,
+			textAlign: 'center',
 		},
 	})
 );
@@ -129,14 +138,34 @@ const ContactBook: React.FC<ContactBookProps> = ({ openContactBook, ContactData,
 													</Typography>
 													<div>
 														<ButtonGroup size='small'>
-															<IconButton>
-																<EmailIcon
-																	color='primary'
-																	onClick={() =>
-																		composeMail(contactSelect[0].nombre, contactSelect[0].email)
-																	}
-																/>
-															</IconButton>
+															<Tooltip title='Nuevo Mensaje'>
+																<IconButton>
+																	<EmailIcon
+																		color='primary'
+																		onClick={() =>
+																			composeMail(contactSelect[0].nombre, contactSelect[0].email)
+																		}
+																	/>
+																</IconButton>
+															</Tooltip>
+															<Tooltip title='Editar Contacto'>
+																<IconButton>
+																	<EditIcon
+																		onClick={() =>
+																			composeMail(contactSelect[0].nombre, contactSelect[0].email)
+																		}
+																	/>
+																</IconButton>
+															</Tooltip>
+															<Tooltip title='Delete Contacto'>
+																<IconButton>
+																	<DeleteIcon
+																		onClick={() =>
+																			composeMail(contactSelect[0].nombre, contactSelect[0].email)
+																		}
+																	/>
+																</IconButton>
+															</Tooltip>
 														</ButtonGroup>
 													</div>
 												</Grid>
@@ -195,7 +224,12 @@ const ContactBook: React.FC<ContactBookProps> = ({ openContactBook, ContactData,
 								</Paper>
 							</>
 						) : (
-							<b>Seleccione un Contacto</b>
+							<Grid container>
+								<Grid item xs={12} className={styles.paper}>
+									<img src={imgContactos} alt={''} height='60' width='60' />
+									<h4>Seleccione un contacto para visualizarlo aquí</h4>
+								</Grid>
+							</Grid>
 						)}
 					</div>
 				</Splitter>
